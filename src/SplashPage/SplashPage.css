@@ -1,0 +1,47 @@
+
+.intro_header {
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+  }
+
+  .intro_header h1 {
+      font-size: 36px;
+  }
+
+  .intro_header h2 {
+      font-size: 18px;
+      line-height: 30px;
+  }
+  
+  .getting_started {
+    background-color: gray;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .splash_login_links {
+    background-color: lightgray;
+    height: 150px;
+    text-align: center;
+    padding-top: 30px;
+    line-height: 40px;
+  }
+
+  @media screen and (max-width: 700px) {
+    .intro_header h1 {
+        font-size: 28px;
+    }
+    .intro_header h2 {
+        font-size: 18px;
+    }
+    .intro_header {
+        height: 150px;
+        text-align: center;
+    }
+  }
