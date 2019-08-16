@@ -5,8 +5,7 @@ import Login from './AccountPages/Login.js';
 import Register from './AccountPages/Register.js';
 import SavedProgressions from './Editor/SavedProgressions/SavedProgressions.js';
 import Editor from './Editor/Editor.js';
-import Nav from './Nav/Nav.js'
-import './reset.css';
+import './App.css';
 
 class App extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../reset.css';
+import './Nav.css';
 
 
 class Nav extends Component {
@@ -15,7 +15,7 @@ class Nav extends Component {
                               </div>)
         return (
             <nav>   
-                <h1>Chord Magic</h1>
+                <h1><Link to='/editor'>Chord Magic</Link></h1>
                 <Link to='/editor'><img src='' alt='chord magic logo' /></Link>
                 {!this.props.loggedIn ? signedInFalse : signedInTrue}
             </nav>
