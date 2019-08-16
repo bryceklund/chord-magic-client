@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Timeline from './Timeline/Timeline.js';
-import Library from './Library/Library.js';
+import Timeline from './Timeline/Timeline.js.js';
+import Library from './Library/Library.js.js';
 
 class Editor extends Component {
     render() {

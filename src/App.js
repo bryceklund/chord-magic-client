@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import {Route, Link} from 'react-router-dom';
-import SplashPage from './SplashPage/SplashPage.js'
-import Login from './AccountPages/Login.js';
-import Register from './AccountPages/Register.js';
-import SavedProgressions from './Editor/SavedProgressions/SavedProgressions.js';
-import Editor from './Editor/Editor.js';
+import SplashPage from './SplashPage/SplashPage.js.js'
+import Login from './AccountPages/Login.js.js';
+import Register from './AccountPages/Register.js.js';
+import SavedProgressions from './Editor/SavedProgressions/SavedProgressions.js.js';
+import Editor from './Editor/Editor.js.js';
 import './App.css';
 
 class App extends Component {
