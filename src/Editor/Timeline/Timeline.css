@@ -1,0 +1,72 @@
+.timeline {
+    margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 250px;
+  }
+  
+  .play_stop_buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .player_timeline {
+    width: 500px;
+    height: 150px;
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .chord_box {
+    border: 1px solid black;
+    width: 125px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chord_label {
+    font-size: 40px;
+    position: absolute;
+    top: 50px;
+    text-align: center;
+  }
+  
+  .delete_chord {
+    width: 100%;
+    height: 25px;
+  }
+  
+  .move_chord_buttons {
+    display: flex;
+    height: 35px;
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .move_chord_buttons > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .scrubber_buttons {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .slide_container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
