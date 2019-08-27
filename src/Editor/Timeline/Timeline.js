@@ -5,10 +5,47 @@ class Timeline extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        activeChords: ['G', 'A', 'B', 'C', 'D', 'E', 'C'],
+        activeChords: [
+          {
+            id: 0,
+            name: 'G',
+            active: false
+          }, 
+          {
+            id: 1,
+            name: 'A',
+            active: false
+          }, 
+          {
+            id: 2,
+            name: 'B',
+            active: false
+          }, 
+          {
+            id: 3,
+            name: 'C',
+            active: false
+          }, 
+          {
+            id: 4,
+            name: 'D',
+            active: false
+          }, 
+          {
+            id: 5,
+            name: 'E',
+            active: false
+          }, 
+          {
+            id: 6,
+            name: 'C',
+            active: false
+          }
+        ],
+        timelineChords: ['', '', '', ''],
         init: 0,
         end: 4,
-        timelineChords: ['', '', '', '']
+        currentCell: null
       }
     }
     incrementTimeline = () => {
@@ -20,8 +57,8 @@ class Timeline extends Component {
         this.setTimelineChords()
       }
     }
+
     decrementTimeline = () => {
-      if (this.state.timelineChords.length >= 3) {
         if (this.state.init > 0) {
           this.setState({
             init: this.state.init -= 1,
@@ -29,32 +66,47 @@ class Timeline extends Component {
           })
           this.setTimelineChords()
         }
-      }
     }
+
     setTimelineChords = () => {
       this.setState({
         timelineChords: this.state.activeChords.slice(this.state.init, this.state.end)
       })
-      console.log(this.state.init, this.state.end)
     }
-    removeChord = (index) => {
+
+    removeChord = (id) => {
       this.setState({
-        activeChords: this.state.activeChords.splice(index, 1)
-      }, this.setTimelineChords())
-      console.log(this.state.activeChords, 'master chords list')
-      console.log(this.state.timelineChords, "active chords list")
+        activeChords: this.state.activeChords.filter(chord => chord.id !== id)
+      }, () => this.setTimelineChords())
+
     }
+
     swapChords = (a, b) => {
       const temp = this.state.activeChords[a]
       const tempArr = this.state.activeChords
       tempArr[a] = tempArr[b]
       tempArr[b] = temp
-      console.log('swap chords', tempArr)
-      console.log(a, b)
+      this.setTimelineChords()
+    }
+
+    setActiveCell = (id) => {
+      this.setTimelineChords()
+      console.log(id)
+      const index = this.state.activeChords.findIndex(chord => chord.id === id)
+      this.state.activeChords.map(chord => {
+        if (chord.id === index) {
+          chord.active = true
+        } else {
+          chord.active = false
+        }
+      })
+      this.setState({
+        currentCell: index
+      }, () => this.setTimelineChords())
+
     }
     componentDidMount() {
       this.setTimelineChords()
-      console.log(this.state.timelineChords)
     }    
     render() {
         return (
@@ -65,13 +117,16 @@ class Timeline extends Component {
             </div>
             <div className='player_timeline'>
 
-            <div className='chord_box one'>
-                {this.state.timelineChords[0] 
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.init)}>X</button> 
+            <div className={`chord_box one`}>
+                {this.state.timelineChords[0]
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[0].id)}>X</button> 
                   : null}
-                <span className='chord_label'>
-                  {this.state.timelineChords[0] 
-                    ? this.state.timelineChords[0] 
+                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[0].id === chord.id).id)} 
+                    className={`chord_label ${this.state.activeChords[this.state.init].active 
+                                              ? 'highlighted' 
+                                              : ''}`}>
+                  {this.state.timelineChords[0]
+                    ? this.state.timelineChords[0].name 
                     : '+'}
                 </span>
                 {this.state.timelineChords[0]
@@ -80,28 +135,31 @@ class Timeline extends Component {
                       ? <button className='move_chord_left' onClick={() => this.swapChords(this.state.init, this.state.init - 1)}><img src='' alt='move left' /></button>
                       : null}
                     {this.state.timelineChords[1]
-                      ? <button className='move_chord_right'><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init, this.state.init + 1)}><img src='' alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
             </div>
 
-            <div className='chord_box two'>
+            <div className={`chord_box two`}>
                 {this.state.timelineChords[1] 
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.init + 1)}>X</button> 
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[1].id)}>X</button> 
                   : null}
-                <span className='chord_label'>
+                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[1].id === chord.id).id)} 
+                  className={`chord_label ${this.state.activeChords[this.state.init + 1].active  
+                                              ? 'highlighted' 
+                                              : ''}`}>
                   {this.state.timelineChords[1] 
-                    ? this.state.timelineChords[1] 
+                    ? this.state.timelineChords[1].name 
                     : this.state.timelineChords[0] 
                     ? '+' 
                     : null}
                 </span>
                 {this.state.timelineChords[1]
                   ? (<div className='move_chord_buttons'>
-                      <button className='move_chord_left'><img src='' alt='move left' /></button>
+                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 1, this.state.init)}><img src='' alt='move left' /></button>
                     {this.state.timelineChords[2]
-                      ? <button className='move_chord_right'><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 1, this.state.init + 2)}><img src='' alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
@@ -109,19 +167,23 @@ class Timeline extends Component {
 
             <div className='chord_box three'>
                 {this.state.timelineChords[2] 
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.init + 2)}>X</button> 
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[2].id)}>X</button> 
                   : null}
-                <span className='chord_label'>
+                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[2].id === chord.id).id)} 
+                  className={`chord_label ${this.state.currentCell === this.state.timelineChords[2].id 
+                                              ? 'highlighted' 
+                                              : ''}`}>
                   {this.state.timelineChords[2] 
-                    ? this.state.timelineChords[2] 
-                    : this.state.timelineChords[1] ? '+' 
+                    ? this.state.timelineChords[2].name 
+                    : this.state.timelineChords[1] 
+                    ? '+' 
                     : null}
                 </span>
                 {this.state.timelineChords[2]
                   ? (<div className='move_chord_buttons'>
-                      <button className='move_chord_left'><img src='' alt='move left' /></button>
+                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 2, this.state.init + 1)}><img src='' alt='move left' /></button>
                     {this.state.timelineChords[3]
-                      ? <button className='move_chord_right'><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 2, this.state.init + 3)}><img src='' alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
@@ -129,20 +191,23 @@ class Timeline extends Component {
 
               <div className='chord_box four'>
                 {this.state.timelineChords[3] 
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.end)}>X</button> 
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[3].id)}>X</button> 
                   : null}
-                <span className='chord_label'>
+                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[3].id === chord.id).id)} 
+                  className={`chord_label ${this.state.currentCell === this.state.timelineChords[3].id 
+                                              ? 'highlighted' 
+                                              : ''}`}>
                   {this.state.timelineChords[3] 
-                    ? this.state.timelineChords[3] 
+                    ? this.state.timelineChords[3].name 
                     : this.state.timelineChords[2] 
                     ? '+' 
                     : null}
                 </span>
                 {this.state.timelineChords[3]
                   ? (<div className='move_chord_buttons'>
-                      <button className='move_chord_left'><img src='' alt='move left' /></button>
+                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 3, this.state.init + 2)}><img src='' alt='move left' /></button>
                     {this.state.activeChords[this.state.end]
-                      ? <button className='move_chord_right'><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 3, this.state.init + 4)}><img src='' alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
