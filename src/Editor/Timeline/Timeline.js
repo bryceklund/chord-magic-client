@@ -45,14 +45,46 @@ class Timeline extends Component {
         timelineChords: ['', '', '', ''],
         init: 0,
         end: 4,
-        currentCell: null
+        currentCell: null,
+        stopped: false
       }
     }
+
+    stopPlayback = () => {
+      this.setState({
+        stopped: true
+      })
+    }
+
+    play = () => {
+      const updateComponent = this.setTimelineChords.bind()
+      const playChord = this.setActiveCell.bind()
+      const stopPlayback = this.stopPlayback.bind()
+      let counter = 0
+      function async(arr) {
+        counter++
+        if (counter === arr.length) {
+          stopPlayback()
+        }
+      }
+
+        this.state.activeChords.forEach((chord, i, arr) => {
+          if (this.state.stopped === false) {
+            console.log(this.state.stopped)
+            setTimeout(function() {
+              playChord(i)
+              updateComponent()
+              async(arr)
+              console.log(counter)}, i * 1000)
+            }
+        })
+  }
+
     incrementTimeline = () => {
       if (this.state.timelineChords.length > 3) {
         this.setState({
           init: this.state.init += 1,
-          end: this.state.end +=1
+          end: this.state.end += 1
         })
         this.setTimelineChords()
       }
@@ -72,6 +104,7 @@ class Timeline extends Component {
       this.setState({
         timelineChords: this.state.activeChords.slice(this.state.init, this.state.end)
       })
+      console.log(this.state.stopped)
     }
 
     removeChord = (id) => {
@@ -90,30 +123,28 @@ class Timeline extends Component {
     }
 
     setActiveCell = (id) => {
-      this.setTimelineChords()
-      console.log(id)
-      const index = this.state.activeChords.findIndex(chord => chord.id === id)
       this.state.activeChords.map(chord => {
-        if (chord.id === index) {
+        if (chord.id === id) {
           chord.active = true
         } else {
           chord.active = false
         }
       })
       this.setState({
-        currentCell: index
+        currentCell: id
       }, () => this.setTimelineChords())
-
     }
+
     componentDidMount() {
       this.setTimelineChords()
-    }    
+    }  
+
     render() {
         return (
             <section className='timeline'>
             <div className='play_stop_buttons'>
-              <button><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
-              <button><img src='' alt='stop button' /></button>
+              <button onClick={() => this.play()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button onClick={() => this.stopPlayback()}><img src='' alt='stop button' /></button>
             </div>
             <div className='player_timeline'>
 
@@ -121,8 +152,8 @@ class Timeline extends Component {
                 {this.state.timelineChords[0]
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[0].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[0].id === chord.id).id)} 
-                    className={`chord_label ${this.state.activeChords[this.state.init].active 
+                <span onClick={() => this.setActiveCell(this.state.timelineChords[0].id)} 
+                    className={`chord_label ${this.state.timelineChords[0] && this.state.timelineChords[0].active 
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[0]
@@ -145,8 +176,8 @@ class Timeline extends Component {
                 {this.state.timelineChords[1] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[1].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[1].id === chord.id).id)} 
-                  className={`chord_label ${this.state.activeChords[this.state.init + 1].active  
+                <span onClick={() => this.setActiveCell(this.state.timelineChords[1].id)} 
+                  className={`chord_label ${this.state.timelineChords[1] && this.state.timelineChords[1].active  
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[1] 
@@ -169,8 +200,8 @@ class Timeline extends Component {
                 {this.state.timelineChords[2] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[2].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[2].id === chord.id).id)} 
-                  className={`chord_label ${this.state.currentCell === this.state.timelineChords[2].id 
+                <span onClick={() => this.setActiveCell(this.state.timelineChords[2].id)} 
+                  className={`chord_label ${this.state.timelineChords[2] && this.state.timelineChords[2].active 
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[2] 
@@ -193,8 +224,8 @@ class Timeline extends Component {
                 {this.state.timelineChords[3] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[3].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.activeChords.find(chord => this.state.timelineChords[3].id === chord.id).id)} 
-                  className={`chord_label ${this.state.currentCell === this.state.timelineChords[3].id 
+                <span onClick={() => this.setActiveCell(this.state.timelineChords[3].id)} 
+                  className={`chord_label ${this.state.timelineChords[3] && this.state.timelineChords[3].active
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[3] 
