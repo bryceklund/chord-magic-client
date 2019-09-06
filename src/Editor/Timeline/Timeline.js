@@ -46,39 +46,39 @@ class Timeline extends Component {
         init: 0,
         end: 4,
         currentCell: null,
-        stopped: false
+        playback: []
       }
     }
 
     stopPlayback = () => {
-      this.setState({
-        stopped: true
-      })
+      for (let i = 0; i < this.state.playback.length; i++) {
+        clearTimeout(this.state.playback[i])
+      }
+    }
+
+    startPlayback = () => {
+      this.stopPlayback()
+      this.play()
     }
 
     play = () => {
+      this.setTimelineChords()
       const updateComponent = this.setTimelineChords.bind()
       const playChord = this.setActiveCell.bind()
-      const stopPlayback = this.stopPlayback.bind()
       let counter = 0
-      function async(arr) {
-        counter++
-        if (counter === arr.length) {
-          stopPlayback()
-        }
-      }
-
+      let playback = []
+      while (counter < this.state.activeChords.length) {
         this.state.activeChords.forEach((chord, i, arr) => {
-          if (this.state.stopped === false) {
-            console.log(this.state.stopped)
-            setTimeout(function() {
-              playChord(i)
-              updateComponent()
-              async(arr)
-              console.log(counter)}, i * 1000)
-            }
+          playback[i] = setTimeout(function() {
+            playChord(chord.id)
+            updateComponent()}, i * 1000)
+            counter++
         })
-  }
+      }
+      this.setState({
+        playback
+      })
+    }
 
     incrementTimeline = () => {
       if (this.state.timelineChords.length > 3) {
@@ -104,7 +104,6 @@ class Timeline extends Component {
       this.setState({
         timelineChords: this.state.activeChords.slice(this.state.init, this.state.end)
       })
-      console.log(this.state.stopped)
     }
 
     removeChord = (id) => {
@@ -123,9 +122,19 @@ class Timeline extends Component {
     }
 
     setActiveCell = (id) => {
-      this.state.activeChords.map(chord => {
+      let init = this.state.init
+      let end = this.state.end
+      this.state.activeChords.map((chord, idx) => {
         if (chord.id === id) {
           chord.active = true
+          if (idx === end) {
+            this.incrementTimeline()
+          } else if (idx < init) {
+            this.setState({
+              init: 0,
+              end: 4
+            })
+          }
         } else {
           chord.active = false
         }
@@ -133,6 +142,7 @@ class Timeline extends Component {
       this.setState({
         currentCell: id
       }, () => this.setTimelineChords())
+      
     }
 
     componentDidMount() {
@@ -143,7 +153,7 @@ class Timeline extends Component {
         return (
             <section className='timeline'>
             <div className='play_stop_buttons'>
-              <button onClick={() => this.play()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button onClick={() => this.startPlayback()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={() => this.stopPlayback()}><img src='' alt='stop button' /></button>
             </div>
             <div className='player_timeline'>
