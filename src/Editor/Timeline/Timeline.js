@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Synth from '../Synth.js'
 import './Timeline.css';
 
 class Timeline extends Component {
@@ -9,36 +10,50 @@ class Timeline extends Component {
           {
             id: 0,
             name: 'G',
+            scale: 'maj',
+            oct: 'minusTwo',
             active: false
           }, 
           {
             id: 1,
-            name: 'A',
+            name: 'B',
+            scale: 'maj',
+            oct: 'minusTwo',
             active: false
           }, 
           {
             id: 2,
-            name: 'B',
+            name: 'E',
+            scale: 'min',
+            oct: 'minusTwo',
             active: false
           }, 
           {
             id: 3,
             name: 'C',
+            scale: 'maj',
+            oct: 'minusTwo',
             active: false
           }, 
           {
             id: 4,
-            name: 'D',
+            name: 'G',
+            scale: 'maj',
+            oct: 'minusTwo',
             active: false
           }, 
           {
             id: 5,
-            name: 'E',
+            name: 'B',
+            scale: 'min',
+            oct: 'minusTwo',
             active: false
           }, 
           {
             id: 6,
             name: 'C',
+            scale: 'maj',
+            oct: 'minusTwo',
             active: false
           }
         ],
@@ -46,8 +61,28 @@ class Timeline extends Component {
         init: 0,
         end: 4,
         currentCell: null,
-        playback: []
+        playback: [],
+        speed: 1.5,
+        volume: 0.1,
+        voice: 'sawtooth',
+        bpm: 160,
+        displayVolume: 25
+        //octave: 'zero',
       }
+    }
+
+    setSpeed = (speed) => {
+      this.setState({
+        speed: speed / 20,
+        bpm: Math.floor(240 / (speed / 20))
+      })
+    }
+
+    setVolume = (volume) => {
+      this.setState({
+        volume: volume / 400,
+        displayVolume: volume
+      })
     }
 
     stopPlayback = () => {
@@ -63,21 +98,30 @@ class Timeline extends Component {
 
     play = () => {
       this.setTimelineChords()
+      const duration = this.state.speed
+      const volume = this.state.volume
+      const voice = this.state.voice
+      console.log(duration, volume)
       const updateComponent = this.setTimelineChords.bind()
       const playChord = this.setActiveCell.bind()
       let counter = 0
       let playback = []
+
       while (counter < this.state.activeChords.length) {
-        this.state.activeChords.forEach((chord, i, arr) => {
+        this.state.activeChords.forEach((chord, i) => {
           playback[i] = setTimeout(function() {
             playChord(chord.id)
-            updateComponent()}, i * 1000)
+            updateComponent()
+            Synth(voice, chord.oct, duration, volume, chord.scale, chord.name)}, i * (duration * 1000))
             counter++
         })
+
       }
       this.setState({
         playback
       })
+
+      
     }
 
     incrementTimeline = () => {
@@ -258,12 +302,14 @@ class Timeline extends Component {
             <div className='scrubber_buttons'>
               <button onClick={() => this.decrementTimeline()}><img src='' alt='scrub left' /></button>
               <div className="slide_container">
-                <label htmlFor='volume'>Volume</label>
-                <input type="range" min="1" max="100" value="50" className="volume_slider" id="volume" />
+                <label htmlFor='volume'>Volume: {this.state.displayVolume}%</label>
+                <input type="range" min="0" max="100" defaultValue="25" className="volume_slider" id="volume" 
+                  onChange={(e) => this.setVolume(e.target.value)} />
               </div>
               <div className="slide_container">
-                <label htmlFor='speed'>Speed</label>
-                <input type="range" min="1" max="100" value="50" className="speed_slider" id="speed" />
+                <label htmlFor='speed'>Speed: {this.state.bpm} BPM</label>
+                <input type="range" min="1" max="100" defaultValue="30" className="speed_slider" id="speed"
+                  onChange={(e) => this.setSpeed(e.target.value)} />
               </div>
               <button onClick={() => this.incrementTimeline()}><img src='' alt='scrub right' /></button>
             </div>
