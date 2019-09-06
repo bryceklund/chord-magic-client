@@ -39,9 +39,6 @@ function Synth(voice, oct, dur, vol, scale, chordName) {
         osc.connect(volume)
     })
 
-    //set playtime
-    const duration = dur
-
     //get current time from API
     const startTime = context.currentTime
 
