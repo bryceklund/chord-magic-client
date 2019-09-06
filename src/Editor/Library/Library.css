@@ -1,0 +1,335 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 50px;
+}
+
+nav {
+  width: 100%;
+  height: 35px;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: darkgray;
+}
+
+.timeline {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 250px;
+}
+
+.play_stop_buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.player_timeline {
+  width: 500px;
+  height: 150px;
+  background-color: lightgrey;
+  display: flex;
+  flex-direction: row;
+}
+
+.chord_box {
+  border: 1px solid black;
+  width: 125px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chord_label {
+  font-size: 40px;
+  position: absolute;
+  top: 50px;
+  text-align: center;
+}
+
+.delete_chord {
+  width: 100%;
+  height: 25px;
+}
+
+.move_chord_buttons {
+  display: flex;
+  height: 35px;
+  position: absolute;
+  bottom: 0;
+}
+
+.move_chord_buttons > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrubber_buttons {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.slide_container {
+  text-align: center;
+}
+
+.library_container {
+  margin-top: 50px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.library_settings {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 700px;
+  height: 300px;
+  background: gray;
+  border: solid black 1px;
+}
+
+.library {
+  width: 75%;
+  background: lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.scales {
+  list-style: none;
+  padding-left: 0;
+  columns: 3;
+}
+
+.scale a, .scale a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.scale {
+  font-size: 50px;
+  width: 150px;
+  border: 3px solid black;
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: copy;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 25%;
+}
+
+.oct_ins_pre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prehear_container, .instrument_container, .octave_container {
+  margin-bottom: 15px;
+}
+
+.octave_container {
+  text-align: center;
+  line-height: 25px;
+}
+
+.octave_div {
+  text-align: center;
+  display: inline-block;
+}
+
+.octave_div label {
+  display: block;
+}
+
+.login_message {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.save_tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  bottom: 300px;
+}
+
+.back {
+    background: none;
+    text-decoration: none;
+    border: none;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.selected {
+    color: white;
+    background-color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+
+@media screen and (max-width: 700px) {
+
+  .player_timeline {
+    width: 300px;
+  }
+
+  .scrubber_buttons {
+    width: 300px;
+    justify-content: space-around;
+  }
+
+  .slide_container {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .volume_slider, .speed_slider {
+    width: 100px;
+  }
+
+  .library_settings {
+    flex-direction: column;
+    width: 325px;
+    height: 700px;
+  }
+
+  .settings {
+    height: 25%;
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .library {
+    height: 75%;
+    width: 100%;
+  }
+
+  .oct_ins_pre {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .save_tooltip {
+    bottom: initial;
+  }
+
+  .scale {
+    font-size: 30px;
+    width: 130px;
+    margin-bottom: 40px;
+  }
+
+  .scales {
+    columns: 2;
+  }
+
+  .login_message {
+    width: 130px;
+  }
+
+  .back {
+    margin: 15px;
+  }
+
+  
+}
+
