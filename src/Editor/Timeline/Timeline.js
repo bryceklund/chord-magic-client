@@ -12,6 +12,7 @@ class Timeline extends Component {
             name: 'G',
             scale: 'maj',
             oct: 'minusTwo',
+            voice: 'triangle',
             active: false
           }, 
           {
@@ -19,6 +20,7 @@ class Timeline extends Component {
             name: 'B',
             scale: 'maj',
             oct: 'minusTwo',
+            voice: 'triangle',
             active: false
           }, 
           {
@@ -26,6 +28,7 @@ class Timeline extends Component {
             name: 'E',
             scale: 'min',
             oct: 'minusTwo',
+            voice: 'sawtooth',
             active: false
           }, 
           {
@@ -33,6 +36,7 @@ class Timeline extends Component {
             name: 'C',
             scale: 'maj',
             oct: 'minusTwo',
+            voice: 'square',
             active: false
           }, 
           {
@@ -40,6 +44,7 @@ class Timeline extends Component {
             name: 'G',
             scale: 'maj',
             oct: 'minusTwo',
+            voice: 'triangle',
             active: false
           }, 
           {
@@ -47,6 +52,7 @@ class Timeline extends Component {
             name: 'B',
             scale: 'min',
             oct: 'minusTwo',
+            voice: 'triangle',
             active: false
           }, 
           {
@@ -54,6 +60,7 @@ class Timeline extends Component {
             name: 'C',
             scale: 'maj',
             oct: 'minusTwo',
+            voice: 'square',
             active: false
           }
         ],
@@ -64,10 +71,8 @@ class Timeline extends Component {
         playback: [],
         speed: 1.5,
         volume: 0.1,
-        voice: 'sawtooth',
         bpm: 160,
         displayVolume: 25
-        //octave: 'zero',
       }
     }
 
@@ -100,8 +105,6 @@ class Timeline extends Component {
       this.setTimelineChords()
       const duration = this.state.speed
       const volume = this.state.volume
-      const voice = this.state.voice
-      console.log(duration, volume)
       const updateComponent = this.setTimelineChords.bind()
       const playChord = this.setActiveCell.bind()
       let counter = 0
@@ -112,16 +115,13 @@ class Timeline extends Component {
           playback[i] = setTimeout(function() {
             playChord(chord.id)
             updateComponent()
-            Synth(voice, chord.oct, duration, volume, chord.scale, chord.name)}, i * (duration * 1000))
+            Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name)}, i * (duration * 1000))
             counter++
         })
-
       }
       this.setState({
         playback
-      })
-
-      
+      })      
     }
 
     incrementTimeline = () => {
@@ -165,6 +165,24 @@ class Timeline extends Component {
       this.setTimelineChords()
     }
 
+    toggleActiveChord = (id) => {
+      if (!this.state.activeChords.find(chord => chord.id === id).active) {
+        this.props.chordSelected('active')
+        this.props.setIndex(this.state.activeChords.indexOf(this.state.activeChords.find(chord => chord.id === id)))
+        this.setActiveCell(id)
+      } else {
+        this.props.chordSelected()
+        this.setInactiveCell(id)
+      }
+    }
+
+    setInactiveCell = (id) => {
+      this.setState(prevState => ({
+        activeChords: prevState.activeChords.map(chord => chord.active === true ? {...chord, active: false}: chord)
+      }), this.setActiveCell())
+
+    }
+
     setActiveCell = (id) => {
       let init = this.state.init
       let end = this.state.end
@@ -206,12 +224,12 @@ class Timeline extends Component {
                 {this.state.timelineChords[0]
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[0].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.timelineChords[0].id)} 
+                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[0].id)} 
                     className={`chord_label ${this.state.timelineChords[0] && this.state.timelineChords[0].active 
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[0]
-                    ? this.state.timelineChords[0].name 
+                    ? this.state.timelineChords[0].name + this.state.timelineChords[0].scale 
                     : '+'}
                 </span>
                 {this.state.timelineChords[0]
@@ -230,12 +248,12 @@ class Timeline extends Component {
                 {this.state.timelineChords[1] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[1].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.timelineChords[1].id)} 
+                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[1].id)} 
                   className={`chord_label ${this.state.timelineChords[1] && this.state.timelineChords[1].active  
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[1] 
-                    ? this.state.timelineChords[1].name 
+                    ? this.state.timelineChords[1].name + this.state.timelineChords[1].scale 
                     : this.state.timelineChords[0] 
                     ? '+' 
                     : null}
@@ -254,12 +272,12 @@ class Timeline extends Component {
                 {this.state.timelineChords[2] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[2].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.timelineChords[2].id)} 
+                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[2].id)} 
                   className={`chord_label ${this.state.timelineChords[2] && this.state.timelineChords[2].active 
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[2] 
-                    ? this.state.timelineChords[2].name 
+                    ? this.state.timelineChords[2].name + this.state.timelineChords[2].scale
                     : this.state.timelineChords[1] 
                     ? '+' 
                     : null}
@@ -278,12 +296,12 @@ class Timeline extends Component {
                 {this.state.timelineChords[3] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[3].id)}>X</button> 
                   : null}
-                <span onClick={() => this.setActiveCell(this.state.timelineChords[3].id)} 
+                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[3].id)} 
                   className={`chord_label ${this.state.timelineChords[3] && this.state.timelineChords[3].active
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[3] 
-                    ? this.state.timelineChords[3].name 
+                    ? this.state.timelineChords[3].name + this.state.timelineChords[3].scale
                     : this.state.timelineChords[2] 
                     ? '+' 
                     : null}
