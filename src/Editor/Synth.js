@@ -3,7 +3,7 @@ const AudioStore = require('./AudioStore.js')
 function Synth(voice, oct, dur, vol, scale, chordName) {
     //create instance of the API
     const context = new AudioContext()
-    
+    console.log(voice, oct, dur, vol, scale, chordName)
     //notes in this octave
     const notes = AudioStore.notes[oct]
 

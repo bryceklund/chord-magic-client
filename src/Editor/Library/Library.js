@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../Synth.js'
+import Synth from '../Synth.js'
 import './Library.css'
 
 class Library extends Component {
@@ -9,27 +9,80 @@ class Library extends Component {
             toggleHidden: false,
             scale: null,
             chord: null,
-            octave: null,
-            voice: null,
+            octave: 'zero',
+            voice: 'triangle',
+            prehear: false
         }
     }
 
-    toggleHidden = () => {
+    togglePrehear = () => {
+      this.setState({
+        prehear: !this.state.prehear
+      })
+    }
+
+    setOct = (oct) => {
+      this.setState({
+        octave: oct
+      }, this.props.storeChord(this.state.voice, oct, this.state.scale, this.state.chord))
+    }
+
+    setVoice = (voice) => {
+      this.setState({
+        voice
+      }, this.props.storeChord(voice, this.state.octave, this.state.scale, this.state.chord))
+    }
+
+    toggleHidden = (back) => {
         this.setState({
             toggleHidden: !this.state.toggleHidden
         })
+        if (back) {
+          this.resetScaleSelection()
+          this.resetChordSelection()
+        }
     }
 
-    highlightSelection = (selection) => {
-        console.log('highlightSelection running')
-        console.log(this.state.chord)
-        console.log(selection.textContent)
-        console.log(this.state)
-        if (selection.textContent === this.state.chord) {
-            console.log('highlighting selection')
-            selection.classList.add('selected')
-            this.forceUpdate()
-        }
+    toggleSelection = (chord, selection) => {
+      console.log(chord, selection)
+      if (selection.classList.contains('selected')) {
+        this.props.chordSelected()
+        this.props.resetSelection()
+        this.resetChordSelection()
+      } else {
+        this.props.chordSelected()
+        this.props.storeChord(this.state.voice, this.state.octave, this.state.scale, chord)
+        this.setState({
+              chord
+        }, this.highlightSelection(selection, chord))
+      }
+    }
+
+    resetScaleSelection = () => {
+      this.setState({
+        scale: null
+      })
+    }
+
+    resetChordSelection = () => {
+      this.setState({
+        chord: null,
+      })
+      const ul = document.getElementsByClassName('chords')[0].children
+      Object.keys(ul).forEach(key => {
+        ul[key].classList.remove('selected')
+      })
+    }
+
+    highlightSelection = (selection, chord) => {
+      if (this.state.prehear) {
+        Synth(this.state.voice, this.state.octave, 1, 0.1, this.state.scale, chord)
+      }
+      const ul = document.getElementsByClassName('chords')[0].children
+      Object.keys(ul).forEach(key => {
+        ul[key].classList.remove('selected')
+      })
+      selection.classList.add('selected')      
     }
 
     setScale = (scale) => {
@@ -53,48 +106,48 @@ class Library extends Component {
                 <div className='settings'>
                   <div className='oct_ins_pre'>
                     <div className='prehear_container'>
-                      <input className='prehear' id='prehear' type="checkbox" />
+                      <input onChange={() => this.togglePrehear()} className='prehear' id='prehear' type="checkbox" />
                       <label className='prehear_label' htmlFor='prehear'>prehear</label>
                     </div>
                     <div className='instrument_container'>
                       <label className='instrument_label' htmlFor='instrument'>instrument:</label>
-                      <select className='instrument' id='instrument'>
+                      <select onChange={(e) => this.setVoice(e.target.value)} defaultValue='triangle' className='instrument' id='instrument'>
                         <option value='sine'>sine</option>
                         <option value='triangle'>triangle</option>
                         <option value='square'>square</option>
-                        <option value='saw'>saw</option>
+                        <option value='sawtooth'>saw</option>
                       </select>
                     </div>
                     <div className='octave_container'>
                       <label htmlFor='octave'>octave</label><br />
                       <div className='octave_div'>
                         <label htmlFor='-2'>-2</label>
-                        <input type='radio' name='octave' value='-2' id='-2' />
+                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='minusTwo' id='-2' />
                       </div>
                       <div className='octave_div'>
                         <label htmlFor='-1'>-1</label>
-                        <input type='radio' name='octave' value='-1' id='-1' />
+                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='minusOne' id='-1' />
                       </div>
                       <div className='octave_div'>
                         <label htmlFor='0'>0</label>
-                        <input type='radio' name='octave' value='0' id='0' />
+                        <input onChange={(e) => this.setOct(e.target.value)} defaultChecked='true' type='radio' name='octave' value='zero' id='0' />
                       </div>
                       <div className='octave_div'>
                         <label htmlFor='1'>1</label>
-                        <input type='radio' name='octave' value='1' id='1' />
+                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='plusOne' id='1' />
                       </div>
                       <div className='octave_div'>
                         <label htmlFor='2'>2</label>
-                        <input type='radio' name='octave' value='2' id='2' />
+                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='plusTwo' id='2' />
                       </div>
                     </div>
                   </div>
+                  <button onClick={this.props.insertChord()} className='insert_chord'>insert chord</button>
                 <p className='login_message'>Login to save your progression!</p>
                 <button className='save_progression hidden'>save progression</button>
-      
               </div>
               <div className='library'>
-                  <button class={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden()}>&lt; back to scales</button>
+                  <button class={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>
                 <ul className={`scales ${this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min</li>
@@ -107,18 +160,18 @@ class Library extends Component {
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>
                 </ul>
                 <ul className={`scales chords ${!this.state.toggleHidden ? 'hidden' : ''}`}>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>A</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>Bb</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>B</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>C</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>C#</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>D</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>Eb</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>E</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>F</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>F#</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>G</li>
-                    <li className='scale' onClick={(e) => this.setChord(e.target.textContent, e.target)}>Ab</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>A</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Bb</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>B</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>C</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Db</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>D</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Eb</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>E</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>F</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Gb</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>G</li>
+                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Ab</li>
                 </ul>
               </div>
       
