@@ -50,7 +50,7 @@ function Synth(voice, oct, dur, vol, scale, chordName) {
     //start and stop playback
     synth.map(osc => {
         osc.start(startTime)
-        osc.stop(startTime + duration)
+        osc.stop(startTime + dur)
     })
 }
 

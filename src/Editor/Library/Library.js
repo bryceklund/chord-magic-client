@@ -24,6 +24,7 @@ class Library extends Component {
         console.log('highlightSelection running')
         console.log(this.state.chord)
         console.log(selection.textContent)
+        console.log(this.state)
         if (selection.textContent === this.state.chord) {
             console.log('highlighting selection')
             selection.classList.add('selected')
@@ -40,7 +41,6 @@ class Library extends Component {
     }
 
     setChord = (chord, target) => {
-
         this.setState({
             chord
         },  this.highlightSelection(target))
