@@ -11,17 +11,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signedIn: false
+      signedIn: false,
+      selected: null
     }
   }
+
+  loadProgression = (progression) => {
+    this.setState({
+      selected: progression
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
           <Route exact path='/' component={SplashPage} />
           <Route exact path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          <Route path='/editor' render={(props) => <Editor {...props} signedIn={this.state.signedIn} />} />
-          <Route path='/saved' render={(props) => <SavedProgressions {...props} signedIn={this.state.signedIn} />} /> 
+          <Route path='/editor' render={(props) => <Editor {...props} progression={this.state.selected} signedIn={this.state.signedIn} />} />
+          <Route path='/saved' render={(props) => <SavedProgressions {...props} loadProgression={this.loadProgression} signedIn={this.state.signedIn} />} /> 
       </React.Fragment>
     );
   }

@@ -44,10 +44,6 @@ class Library extends Component {
     }
 
     toggleSelection = (chord, selection) => {
-<<<<<<< HEAD
-=======
-
->>>>>>> d88a535b630513fe0d65b8c4fec78293e7f842d3
       if (selection.classList.contains('selected')) {
         this.props.chordSelected()
         this.props.resetSelection()

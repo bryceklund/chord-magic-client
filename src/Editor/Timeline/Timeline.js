@@ -6,64 +6,66 @@ class Timeline extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        activeChords: [
-          {
-            id: 0,
-            name: 'G',
-            scale: 'maj',
-            oct: 'minusTwo',
-            voice: 'triangle',
-            active: false
-          }, 
-          {
-            id: 1,
-            name: 'B',
-            scale: 'maj',
-            oct: 'minusTwo',
-            voice: 'triangle',
-            active: false
-          }, 
-          {
-            id: 2,
-            name: 'E',
-            scale: 'min',
-            oct: 'minusTwo',
-            voice: 'sawtooth',
-            active: false
-          }, 
-          {
-            id: 3,
-            name: 'C',
-            scale: 'maj',
-            oct: 'minusTwo',
-            voice: 'square',
-            active: false
-          }, 
-          {
-            id: 4,
-            name: 'G',
-            scale: 'maj',
-            oct: 'minusTwo',
-            voice: 'triangle',
-            active: false
-          }, 
-          {
-            id: 5,
-            name: 'B',
-            scale: 'min',
-            oct: 'minusTwo',
-            voice: 'triangle',
-            active: false
-          }, 
-          {
-            id: 6,
-            name: 'C',
-            scale: 'maj',
-            oct: 'minusTwo',
-            voice: 'square',
-            active: false
-          }
-        ],
+        activeChords: this.props.progression 
+                        ? this.props.progression 
+                        : [
+                            {
+                              id: 0,
+                              name: 'G',
+                              scale: 'maj',
+                              oct: 'minusTwo',
+                              voice: 'triangle',
+                              active: false
+                            }, 
+                            {
+                              id: 1,
+                              name: 'B',
+                              scale: 'maj',
+                              oct: 'minusTwo',
+                              voice: 'triangle',
+                              active: false
+                            }, 
+                            {
+                              id: 2,
+                              name: 'E',
+                              scale: 'min',
+                              oct: 'minusTwo',
+                              voice: 'sawtooth',
+                              active: false
+                            }, 
+                            {
+                              id: 3,
+                              name: 'C',
+                              scale: 'maj',
+                              oct: 'minusTwo',
+                              voice: 'square',
+                              active: false
+                            }, 
+                            {
+                              id: 4,
+                              name: 'G',
+                              scale: 'maj',
+                              oct: 'minusTwo',
+                              voice: 'triangle',
+                              active: false
+                            }, 
+                            {
+                              id: 5,
+                              name: 'B',
+                              scale: 'min',
+                              oct: 'minusTwo',
+                              voice: 'triangle',
+                              active: false
+                            }, 
+                            {
+                              id: 6,
+                              name: 'C',
+                              scale: 'maj',
+                              oct: 'minusTwo',
+                              voice: 'square',
+                              active: false
+                            }
+                          ],
         timelineChords: ['', '', '', ''],
         init: 0,
         end: 4,
@@ -74,6 +76,12 @@ class Timeline extends Component {
         bpm: 160,
         displayVolume: 25
       }
+    }
+
+    loadProgression = (progression) => {
+      this.setState({
+        activeChords: progression
+      })
     }
 
     insertChord = (index, chord) => {

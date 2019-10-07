@@ -16,6 +16,10 @@ class Editor extends Component {
         }
     }
 
+    loadProgression = () => {
+        this.timelineElement.current.loadProgression(this.props.progression)
+    }
+
     setChordIndex = (selectedIndex) => {
         this.setState({
             selectedIndex
@@ -68,7 +72,7 @@ class Editor extends Component {
         return (
             <React.Fragment>
                 <Nav signedIn={this.props.signedIn} />
-                <Timeline ref={this.timelineElement} chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
+                <Timeline ref={this.timelineElement} progression={this.props.progression} chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
                 <Library signedIn={this.props.signedIn} selected={this.state.librarySelection} ref={this.libraryElement} insertChord={this.insertChord} chordSelected={this.toggleLibrarySelection} storeChord={this.updateSelectedChord} resetSelection={this.clearSelectedChord} />
             </React.Fragment>
         );
