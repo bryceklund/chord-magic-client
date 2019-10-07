@@ -6,6 +6,8 @@ import Nav from '../Nav/Nav.js';
 class Editor extends Component {
     constructor(props) {
         super(props)
+        this.timelineElement = React.createRef()
+        this.libraryElement = React.createRef()
         this.state = {
             librarySelection: false,
             timelineSelection: false,
@@ -21,7 +23,9 @@ class Editor extends Component {
     }
 
     insertChord = () => {
-
+        this.timelineElement.current.insertChord(this.state.selectedIndex, this.state.selectedChord)
+        //this.libraryElement.current.resetScaleSelection()
+        this.libraryElement.current.resetChordSelection()
     }
 
     toggleLibrarySelection = (active) => {
@@ -63,9 +67,9 @@ class Editor extends Component {
     render() {
         return (
             <React.Fragment>
-                <Nav />
-                <Timeline chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
-                <Library insertChord={this.insertChord} chordSelected={this.toggleLibrarySelection} storeChord={this.updateSelectedChord} resetSelection={this.clearSelectedChord} />
+                <Nav signedIn={this.props.signedIn} />
+                <Timeline ref={this.timelineElement} chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
+                <Library signedIn={this.props.signedIn} selected={this.state.librarySelection} ref={this.libraryElement} insertChord={this.insertChord} chordSelected={this.toggleLibrarySelection} storeChord={this.updateSelectedChord} resetSelection={this.clearSelectedChord} />
             </React.Fragment>
         );
     }

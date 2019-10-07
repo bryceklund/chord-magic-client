@@ -76,6 +76,20 @@ class Timeline extends Component {
       }
     }
 
+    insertChord = (index, chord) => {
+      let tempArr = this.state.activeChords
+      if (index) {
+        tempArr[index] = {...tempArr[index], ...chord}
+      } else {
+        chord.id = tempArr.length
+        tempArr.push(chord)
+      }
+      this.setState({
+        activeChords: tempArr
+      }, this.setTimelineChords())
+
+    }
+
     setSpeed = (speed) => {
       this.setState({
         speed: speed / 20,
@@ -165,14 +179,24 @@ class Timeline extends Component {
       this.setTimelineChords()
     }
 
+    highlightPlus = (target) => {
+      target.classList.toggle('highlighted_plus')
+    }
+
+    unHighlightPlus = () => {
+      //something
+    }
+
     toggleActiveChord = (id) => {
-      if (!this.state.activeChords.find(chord => chord.id === id).active) {
-        this.props.chordSelected('active')
-        this.props.setIndex(this.state.activeChords.indexOf(this.state.activeChords.find(chord => chord.id === id)))
-        this.setActiveCell(id)
-      } else {
-        this.props.chordSelected()
-        this.setInactiveCell(id)
+      if (typeof id === 'number') {
+        if (!this.state.activeChords.find(chord => chord.id === id).active) {
+          this.props.chordSelected('active')
+          this.props.setIndex(this.state.activeChords.indexOf(this.state.activeChords.find(chord => chord.id === id)))
+          this.setActiveCell(id)
+        } else {
+          this.props.chordSelected()
+          this.setInactiveCell(id)
+        }
       }
     }
 
@@ -223,13 +247,22 @@ class Timeline extends Component {
                 {this.state.timelineChords[0]
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[0].id)}>X</button> 
                   : null}
-                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[0].id)} 
+                <span onClick={(e) => this.state.timelineChords[0] ? this.toggleActiveChord(this.state.timelineChords[0].id) : this.highlightPlus(e.target)}
                     className={`chord_label ${this.state.timelineChords[0] && this.state.timelineChords[0].active 
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[0]
-                    ? this.state.timelineChords[0].name + this.state.timelineChords[0].scale 
+                    ? this.state.timelineChords[0].name
                     : '+'}
+                  {this.state.timelineChords[0]
+                    ? <section className={`${this.state.timelineChords[0] && this.state.timelineChords[0].active 
+                                  ? '' 
+                                  : 'hidden'}`}>
+                        <div className='info_label'>{this.state.timelineChords[0].scale}</div>
+                        <div className='info_label'>{this.state.timelineChords[0].voice}</div>
+                        <div className='info_label'>{this.state.timelineChords[0].oct}</div> 
+                      </section>
+                    : ''}
                 </span>
                 {this.state.timelineChords[0]
                   ? (<div className='move_chord_buttons'>
@@ -247,15 +280,24 @@ class Timeline extends Component {
                 {this.state.timelineChords[1] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[1].id)}>X</button> 
                   : null}
-                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[1].id)} 
+                <span onClick={(e) => this.state.timelineChords[1] ? this.toggleActiveChord(this.state.timelineChords[1].id) : this.highlightPlus(e.target)} 
                   className={`chord_label ${this.state.timelineChords[1] && this.state.timelineChords[1].active  
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[1] 
-                    ? this.state.timelineChords[1].name + this.state.timelineChords[1].scale 
+                    ? this.state.timelineChords[1].name 
                     : this.state.timelineChords[0] 
                     ? '+' 
                     : null}
+                  {this.state.timelineChords[1]
+                    ? <section className={`${this.state.timelineChords[1] && this.state.timelineChords[1].active 
+                                            ? '' 
+                                            : 'hidden'}`}>
+                        <div className='info_label'>{this.state.timelineChords[1].scale}</div>
+                        <div className='info_label'>{this.state.timelineChords[1].voice}</div>
+                        <div className='info_label'>{this.state.timelineChords[1].oct}</div> 
+                      </section>
+                    : ''}
                 </span>
                 {this.state.timelineChords[1]
                   ? (<div className='move_chord_buttons'>
@@ -271,15 +313,24 @@ class Timeline extends Component {
                 {this.state.timelineChords[2] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[2].id)}>X</button> 
                   : null}
-                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[2].id)} 
+                <span onClick={(e) => this.state.timelineChords[2] ? this.toggleActiveChord(this.state.timelineChords[2].id) : this.highlightPlus(e.target)}
                   className={`chord_label ${this.state.timelineChords[2] && this.state.timelineChords[2].active 
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[2] 
-                    ? this.state.timelineChords[2].name + this.state.timelineChords[2].scale
+                    ? this.state.timelineChords[2].name
                     : this.state.timelineChords[1] 
                     ? '+' 
                     : null}
+                  {this.state.timelineChords[2]
+                    ? <section className={`${this.state.timelineChords[2] && this.state.timelineChords[2].active 
+                                            ? '' 
+                                            : 'hidden'}`}>
+                        <div className='info_label'>{this.state.timelineChords[2].scale}</div>
+                        <div className='info_label'>{this.state.timelineChords[2].voice}</div>
+                        <div className='info_label'>{this.state.timelineChords[2].oct}</div> 
+                      </section>
+                    : ''}
                 </span>
                 {this.state.timelineChords[2]
                   ? (<div className='move_chord_buttons'>
@@ -295,15 +346,24 @@ class Timeline extends Component {
                 {this.state.timelineChords[3] 
                   ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[3].id)}>X</button> 
                   : null}
-                <span onClick={() => this.toggleActiveChord(this.state.timelineChords[3].id)} 
+                <span onClick={(e) => this.state.timelineChords[3] ? this.toggleActiveChord(this.state.timelineChords[3].id) : this.highlightPlus(e.target)} 
                   className={`chord_label ${this.state.timelineChords[3] && this.state.timelineChords[3].active
                                               ? 'highlighted' 
                                               : ''}`}>
                   {this.state.timelineChords[3] 
-                    ? this.state.timelineChords[3].name + this.state.timelineChords[3].scale
+                    ? this.state.timelineChords[3].name
                     : this.state.timelineChords[2] 
                     ? '+' 
                     : null}
+                    {this.state.timelineChords[3] 
+                      ? <section className={`${this.state.timelineChords[3] && this.state.timelineChords[3].active 
+                                          ? '' 
+                                          : 'hidden'}`}>
+                          <div className='info_label'>{this.state.timelineChords[3].scale}</div>
+                          <div className='info_label'>{this.state.timelineChords[3].voice}</div>
+                          <div className='info_label'>{this.state.timelineChords[3].oct}</div> 
+                        </section>
+                      : ''}
                 </span>
                 {this.state.timelineChords[3]
                   ? (<div className='move_chord_buttons'>

@@ -44,6 +44,10 @@ class Library extends Component {
     }
 
     toggleSelection = (chord, selection) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> d88a535b630513fe0d65b8c4fec78293e7f842d3
       if (selection.classList.contains('selected')) {
         this.props.chordSelected()
         this.props.resetSelection()
@@ -92,6 +96,12 @@ class Library extends Component {
         })
     }
 
+    setChord = (chord, target) => {
+        this.setState({
+            chord
+        },  this.highlightSelection(target))
+    }
+
     render() {
         return (
             <section className='library_container'>
@@ -135,12 +145,13 @@ class Library extends Component {
                       </div>
                     </div>
                   </div>
-                  <button onClick={this.props.insertChord()} className='insert_chord'>insert chord</button>
-                <p className='login_message'>Login to save your progression!</p>
-                <button className='save_progression hidden'>save progression</button>
+                  <button disabled={!this.props.selected} onClick={() => this.props.insertChord()} className='insert_chord'>insert chord</button>
+                {this.props.signedIn 
+                    ? <button className='save_progression'>save progression</button>
+                    : <p className='login_message'>Login to save your progression!</p>}
               </div>
               <div className='library'>
-                  <button class={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>
+                  <button className={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>
                 <ul className={`scales ${this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min</li>
