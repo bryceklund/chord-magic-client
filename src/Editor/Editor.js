@@ -25,6 +25,7 @@ class Editor extends Component {
     }
 
     toggleLibrarySelection = (active) => {
+        console.log(active)
         if (active) {
             this.setState({
                 librarySelection: true

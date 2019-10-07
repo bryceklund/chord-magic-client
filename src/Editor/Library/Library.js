@@ -44,13 +44,12 @@ class Library extends Component {
     }
 
     toggleSelection = (chord, selection) => {
-      console.log(chord, selection)
       if (selection.classList.contains('selected')) {
         this.props.chordSelected()
         this.props.resetSelection()
         this.resetChordSelection()
       } else {
-        this.props.chordSelected()
+        this.props.chordSelected('active')
         this.props.storeChord(this.state.voice, this.state.octave, this.state.scale, chord)
         this.setState({
               chord

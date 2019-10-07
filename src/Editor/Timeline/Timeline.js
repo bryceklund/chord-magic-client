@@ -204,7 +204,6 @@ class Timeline extends Component {
       this.setState({
         currentCell: id
       }, () => this.setTimelineChords())
-      
     }
 
     componentDidMount() {
