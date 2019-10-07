@@ -121,6 +121,7 @@ nav {
   height: 35px;
   position: absolute;
   bottom: 0;
+  width: 100%;
 }
 
 .move_chord_buttons > button {

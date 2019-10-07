@@ -44,13 +44,13 @@ class Library extends Component {
     }
 
     toggleSelection = (chord, selection) => {
-      console.log(chord, selection)
+
       if (selection.classList.contains('selected')) {
         this.props.chordSelected()
         this.props.resetSelection()
         this.resetChordSelection()
       } else {
-        this.props.chordSelected()
+        this.props.chordSelected('active')
         this.props.storeChord(this.state.voice, this.state.octave, this.state.scale, chord)
         this.setState({
               chord
@@ -142,12 +142,13 @@ class Library extends Component {
                       </div>
                     </div>
                   </div>
-                  <button onClick={this.props.insertChord()} className='insert_chord'>insert chord</button>
-                <p className='login_message'>Login to save your progression!</p>
-                <button className='save_progression hidden'>save progression</button>
+                  <button disabled={!this.props.selected} onClick={() => this.props.insertChord()} className='insert_chord'>insert chord</button>
+                {this.props.signedIn 
+                    ? <button className='save_progression'>save progression</button>
+                    : <p className='login_message'>Login to save your progression!</p>}
               </div>
               <div className='library'>
-                  <button class={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>
+                  <button className={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>
                 <ul className={`scales ${this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min</li>
