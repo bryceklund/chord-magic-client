@@ -151,13 +151,13 @@ class Library extends Component {
                 <ul className={`scales ${this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj7</li>
+                    {/*<li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj7</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min7</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Dim</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Dom7</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Sus2</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Sus4</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>
+                <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>*/}
                 </ul>
                 <ul className={`scales chords ${!this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>A</li>
