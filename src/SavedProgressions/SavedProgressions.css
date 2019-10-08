@@ -15,7 +15,7 @@
     font-size: 20px;
 }
 
-.settings {
+.saved_settings {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -50,7 +50,20 @@
     align-items: center;
 }
 
-.settings button, .back_progression {
+.saved_settings button, .back_progression {
     width: 50px;
     height: 30px;
+}
+
+@media screen and (max-width: 700px) {
+    .saved_settings {
+        height: 15%;
+        width: 100%;
+        flex-direction: row;
+        border-bottom: 5px solid black;
+      }
+
+      .saved_library {
+          width: 100%;
+      }
 }

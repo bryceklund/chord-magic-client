@@ -28,7 +28,6 @@ class Editor extends Component {
 
     insertChord = () => {
         this.timelineElement.current.insertChord(this.state.selectedIndex, this.state.selectedChord)
-        //this.libraryElement.current.resetScaleSelection()
         this.libraryElement.current.resetChordSelection()
     }
 
@@ -71,7 +70,7 @@ class Editor extends Component {
     render() {
         return (
             <React.Fragment>
-                <Nav signedIn={this.props.signedIn} />
+                <Nav signOut={this.props.signOut} signedIn={this.props.signedIn} />
                 <Timeline ref={this.timelineElement} progression={this.props.progression} chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
                 <Library signedIn={this.props.signedIn} selected={this.state.librarySelection} ref={this.libraryElement} insertChord={this.insertChord} chordSelected={this.toggleLibrarySelection} storeChord={this.updateSelectedChord} resetSelection={this.clearSelectedChord} />
             </React.Fragment>

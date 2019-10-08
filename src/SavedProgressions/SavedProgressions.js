@@ -239,13 +239,12 @@ class SavedProgressions extends Component {
         const progs = Object.keys(this.state.progressions).map((p, i) => {
             return <li className='progression'><button className='prog_button' id={p} onClick={(e) => {this.select(this.state.progressions[p], e.target)}}>{p}</button></li>
         })
-        console.log(Object.keys(this.state.progressions))
         return (
             <React.Fragment>
-                <Nav signedIn={this.props.signedIn} />
+                <Nav signOut={this.props.signOut} signedIn={this.props.signedIn} />
                 <section className='library_container'>
                     <div className='library_settings'>
-                        <div className='settings'>
+                        <div className='saved_settings'>
                             <button onClick={() => {this.startPlayback()}} className='play_progression'>play</button>
                             <button onClick={() => {this.stopPlayback()}} className='stop_progression'>stop</button>
                             <Link className={`${!this.state.selected ? 'hidden' : ''}`} to='/editor'><button onClick={() => {this.props.loadProgression(this.state.selected)}} className='load_progression'>load</button></Link>

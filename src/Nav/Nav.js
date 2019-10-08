@@ -11,7 +11,7 @@ class Nav extends Component {
                                </div>)
         const signedInTrue = (<div className='login_links'>
                                     <Link to='/saved'>My Progressions</Link>&nbsp;
-                                    <Link to='/logout'>Logout</Link>
+                                    <Link to='/editor'><button onClick={this.props.signOut} className='logout'>Logout</button></Link>
                               </div>)
         return (
             <nav>   

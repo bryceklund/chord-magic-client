@@ -16,6 +16,12 @@ class App extends Component {
     }
   }
 
+  signOut = () => {
+    this.setState({
+      signedIn: false
+    })
+  }
+
   loadProgression = (progression) => {
     this.setState({
       selected: progression
@@ -28,8 +34,8 @@ class App extends Component {
           <Route exact path='/' component={SplashPage} />
           <Route exact path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          <Route path='/editor' render={(props) => <Editor {...props} progression={this.state.selected} signedIn={this.state.signedIn} />} />
-          <Route path='/saved' render={(props) => <SavedProgressions {...props} loadProgression={this.loadProgression} signedIn={this.state.signedIn} />} /> 
+          <Route path='/editor' render={(props) => <Editor {...props} progression={this.state.selected} signedIn={this.state.signedIn} signOut={this.signOut} />} />
+          <Route path='/saved' render={(props) => <SavedProgressions {...props} loadProgression={this.loadProgression} signedIn={this.state.signedIn} signOut={this.signOut} />} /> 
       </React.Fragment>
     );
   }

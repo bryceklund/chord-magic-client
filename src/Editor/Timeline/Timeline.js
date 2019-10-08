@@ -387,12 +387,12 @@ class Timeline extends Component {
             <div className='scrubber_buttons'>
               <button onClick={() => this.decrementTimeline()}><img src='' alt='scrub left' /></button>
               <div className="slide_container">
-                <label htmlFor='volume'>Volume: {this.state.displayVolume}%</label>
+                <label className='volume' htmlFor='volume'>Volume: {this.state.displayVolume}%</label>
                 <input type="range" min="0" max="100" defaultValue="25" className="volume_slider" id="volume" 
                   onChange={(e) => this.setVolume(e.target.value)} />
               </div>
               <div className="slide_container">
-                <label htmlFor='speed'>Speed: {this.state.bpm} BPM</label>
+                <label className='speed' htmlFor='speed'>Speed: {this.state.bpm} BPM</label>
                 <input type="range" min="1" max="100" defaultValue="30" className="speed_slider" id="speed"
                   onChange={(e) => this.setSpeed(e.target.value)} />
               </div>
