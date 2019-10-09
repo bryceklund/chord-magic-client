@@ -86,6 +86,7 @@ class Timeline extends Component {
 
     insertChord = (index, chord) => {
       let tempArr = this.state.activeChords
+      chord = {...chord, active: false}
       if (index) {
         tempArr[index] = {...tempArr[index], ...chord}
       } else {
@@ -158,6 +159,7 @@ class Timeline extends Component {
 
     decrementTimeline = () => {
         if (this.state.init > 0) {
+          this.unHighlightPlus()
           this.setState({
             init: this.state.init -= 1,
             end: this.state.end -= 1
@@ -188,15 +190,29 @@ class Timeline extends Component {
     }
 
     highlightPlus = (target) => {
+      const tempArr = this.state.activeChords
+      tempArr.map(chord => chord.active = false)
+      this.setState({
+        activeChords: tempArr
+      })
       target.classList.toggle('highlighted_plus')
     }
 
     unHighlightPlus = () => {
-      //something
+      const cells = document.getElementsByClassName('chord_label')
+      let highlightedPlus = undefined
+      Object.keys(cells).map(cell => {
+        if (cells[cell].classList.contains('highlighted_plus')) {
+          highlightedPlus = cells[cell]
+          highlightedPlus.classList.remove('highlighted_plus')
+        }
+      })
+      
     }
 
     toggleActiveChord = (id) => {
       if (typeof id === 'number') {
+        this.unHighlightPlus()
         if (!this.state.activeChords.find(chord => chord.id === id).active) {
           this.props.chordSelected('active')
           this.props.setIndex(this.state.activeChords.indexOf(this.state.activeChords.find(chord => chord.id === id)))
