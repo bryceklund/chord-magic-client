@@ -29,10 +29,14 @@ class Editor extends Component {
     insertChord = () => {
         this.timelineElement.current.insertChord(this.state.selectedIndex, this.state.selectedChord)
         this.libraryElement.current.resetChordSelection()
+        this.setState({
+            selectedChord: {},
+            selectedIndex: null,
+            librarySelection: false
+        })
     }
 
     toggleLibrarySelection = (active) => {
-        console.log(active)
         if (active) {
             this.setState({
                 librarySelection: true
@@ -44,10 +48,16 @@ class Editor extends Component {
         }
     }
 
-    toggleTimelineSelection = () => {
-        this.setState({
-            timelineSelection: !this.state.timelineSelection
-        })
+    toggleTimelineSelection = (active) => {
+        if (active) {
+            this.setState({
+                timelineSelection: true
+            })
+        } else {
+            this.setState({
+                timelineSelection: false
+            })
+        }
     }
 
     updateSelectedChord = (voice, oct, scale, name) => {

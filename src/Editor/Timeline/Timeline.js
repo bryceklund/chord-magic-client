@@ -84,19 +84,43 @@ class Timeline extends Component {
       })
     }
 
+    jumpToChord = (index) => {
+      if (index < 4) {
+        this.setState({
+          end: index + 4,
+          init: index
+        }, () => this.setTimelineChords())
+      } else {
+        this.setState({
+          end: index + 1,
+          init: index - 3
+        }, () => this.setTimelineChords())
+      }
+    }
+
     insertChord = (index, chord) => {
+      let newId
+      let idx = index
+      if (this.state.activeChords.length) {
+        const activeIds = this.state.activeChords.map(chord => chord.id).sort()
+        newId = activeIds[activeIds.length - 1] + 1
+      } else {
+        newId = 0
+      }
       let tempArr = this.state.activeChords
       chord = {...chord, active: false}
-      if (index) {
+      if (typeof index === "number") {
         tempArr[index] = {...tempArr[index], ...chord}
       } else {
-        chord.id = tempArr.length
+        chord.id = newId
         tempArr.push(chord)
+        idx = tempArr.indexOf(chord)
       }
+      this.unHighlightPlus()
+      this.jumpToChord(idx)
       this.setState({
-        activeChords: tempArr
+        activeChords: tempArr,
       }, this.setTimelineChords())
-
     }
 
     setSpeed = (speed) => {
@@ -308,10 +332,10 @@ class Timeline extends Component {
                   className={`chord_label ${this.state.timelineChords[1] && this.state.timelineChords[1].active  
                                               ? 'highlighted' 
                                               : ''}`}>
-                  {this.state.timelineChords[1] 
-                    ? this.state.timelineChords[1].name 
-                    : this.state.timelineChords[0] 
-                    ? '+' 
+                  {this.state.timelineChords[1]
+                    ? this.state.timelineChords[1].name
+                    : this.state.timelineChords[0]
+                    ? '+'
                     : null}
                   {this.state.timelineChords[1]
                     ? <section className={`${this.state.timelineChords[1] && this.state.timelineChords[1].active 
