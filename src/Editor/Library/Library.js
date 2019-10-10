@@ -144,7 +144,7 @@ class Library extends Component {
                   <button disabled={!this.props.selected} onClick={() => this.props.insertChord()} className='insert_chord'>insert chord</button>
                 {this.props.signedIn 
                     ? <button className='save_progression'>save progression</button>
-                    : <p className='login_message'>Login to save your progression!</p>}
+                    : <p className='login_message'>Log in to save your progression!</p>}
               </div>
               <div className='library'>
                   <button className={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>

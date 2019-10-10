@@ -14,7 +14,7 @@ class Timeline extends Component {
                               name: 'G',
                               scale: 'maj',
                               oct: 'minusTwo',
-                              voice: 'triangle',
+                              voice: 'sawtooth',
                               active: false
                             }, 
                             {
@@ -22,7 +22,7 @@ class Timeline extends Component {
                               name: 'B',
                               scale: 'maj',
                               oct: 'minusTwo',
-                              voice: 'triangle',
+                              voice: 'sawtooth',
                               active: false
                             }, 
                             {
@@ -38,7 +38,7 @@ class Timeline extends Component {
                               name: 'C',
                               scale: 'maj',
                               oct: 'minusTwo',
-                              voice: 'square',
+                              voice: 'sawtooth',
                               active: false
                             }, 
                             {
@@ -46,7 +46,7 @@ class Timeline extends Component {
                               name: 'G',
                               scale: 'maj',
                               oct: 'minusTwo',
-                              voice: 'triangle',
+                              voice: 'sawtooth',
                               active: false
                             }, 
                             {
@@ -54,7 +54,7 @@ class Timeline extends Component {
                               name: 'B',
                               scale: 'min',
                               oct: 'minusTwo',
-                              voice: 'triangle',
+                              voice: 'sawtooth',
                               active: false
                             }, 
                             {
@@ -62,11 +62,12 @@ class Timeline extends Component {
                               name: 'C',
                               scale: 'maj',
                               oct: 'minusTwo',
-                              voice: 'square',
+                              voice: 'sawtooth',
                               active: false
                             }
                           ],
         timelineChords: ['', '', '', ''],
+        globalView: '',
         init: 0,
         end: 4,
         currentCell: null,
@@ -78,6 +79,20 @@ class Timeline extends Component {
       }
     }
 
+    setGlobalView = () => {
+      let totalChords = [] 
+      this.state.activeChords.forEach((chord, i) => totalChords[i] = {active: false})
+      for (let i = this.state.init; i < this.state.end; i++) {
+        if (totalChords[i]) {
+          totalChords[i].active = true
+        }
+      }
+      let indicator = totalChords.map(chord => chord.active ? '+' : '-').join('')
+      this.setState({
+        globalView: indicator
+      })
+    }
+
     loadProgression = (progression) => {
       this.setState({
         activeChords: progression
@@ -85,10 +100,11 @@ class Timeline extends Component {
     }
 
     jumpToChord = (index) => {
+      console.log(index)
       if (index < 4) {
         this.setState({
-          end: index + 4,
-          init: index
+          end: 4,
+          init: 0
         }, () => this.setTimelineChords())
       } else {
         this.setState({
@@ -99,6 +115,7 @@ class Timeline extends Component {
     }
 
     insertChord = (index, chord) => {
+      
       let newId
       let idx = index
       if (this.state.activeChords.length) {
@@ -179,6 +196,7 @@ class Timeline extends Component {
         })
         this.setTimelineChords()
       }
+      this.setGlobalView()
     }
 
     decrementTimeline = () => {
@@ -190,12 +208,13 @@ class Timeline extends Component {
           })
           this.setTimelineChords()
         }
+        this.setGlobalView()
     }
 
     setTimelineChords = () => {
       this.setState({
         timelineChords: this.state.activeChords.slice(this.state.init, this.state.end)
-      })
+      }, this.setGlobalView())
     }
 
     removeChord = (id) => {
@@ -289,6 +308,7 @@ class Timeline extends Component {
               <button onClick={() => this.startPlayback()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={() => this.stopPlayback()}><img src='' alt='stop button' /></button>
             </div>
+            <div class='global_view'>{this.state.globalView}</div>
             <div className='player_timeline'>
 
             <div className={`chord_box one`}>
