@@ -71,12 +71,16 @@ nav {
 }
 
 .timeline {
-  margin-top: 75px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 250px;
+}
+
+.global_view {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .play_stop_buttons {
@@ -92,6 +96,8 @@ nav {
   background-color: lightgrey;
   display: flex;
   flex-direction: row;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .chord_box {
@@ -141,7 +147,7 @@ nav {
 }
 
 .library_container {
-  margin-top: 50px;
+  margin-top: 30px;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -210,13 +216,8 @@ nav {
   line-height: 25px;
 }
 
-.octave_div {
-  text-align: center;
-  display: inline-block;
-}
-
-.octave_div label {
-  display: block;
+.octave {
+  width: 100px;
 }
 
 .login_message {
@@ -270,6 +271,7 @@ nav {
   .scrubber_buttons {
     width: 300px;
     justify-content: space-around;
+    padding-top: 10px;
   }
 
   .slide_container {

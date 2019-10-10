@@ -10,6 +10,7 @@ class Library extends Component {
             scale: null,
             chord: null,
             octave: 'zero',
+            displayOctave: '',
             voice: 'triangle',
             prehear: false
         }
@@ -22,8 +23,11 @@ class Library extends Component {
     }
 
     setOct = (oct) => {
+      let newOct;
+      oct == -2 ? newOct = 'minusTwo' : oct == -1 ? newOct = 'minusOne' : oct == 0 ? newOct = 'zero' : oct == 1 ? newOct = 'one' : oct == 2 ? newOct = 'two' : newOct = 'zero'
       this.setState({
-        octave: oct
+        octave: newOct,
+        displayOctave: oct
       }, this.props.storeChord(this.state.voice, oct, this.state.scale, this.state.chord))
     }
 
@@ -118,8 +122,9 @@ class Library extends Component {
                       </select>
                     </div>
                     <div className='octave_container'>
-                      <label htmlFor='octave'>octave</label><br />
-                      <div className='octave_div'>
+                      <label htmlFor='octave'>octave: {this.state.displayOctave || 0}</label><br />
+                      <input name="octave" className="octave" type="range" onChange={(e) => this.setOct(e.target.value)} min="-2" max="2" defaultValue="0" />
+                      {/*<div className='octave_div'>
                         <label htmlFor='-2'>-2</label>
                         <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='minusTwo' id='-2' />
                       </div>
@@ -138,7 +143,7 @@ class Library extends Component {
                       <div className='octave_div'>
                         <label htmlFor='2'>2</label>
                         <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='plusTwo' id='2' />
-                      </div>
+        </div>*/}
                     </div>
                   </div>
                   <button disabled={!this.props.selected} onClick={() => this.props.insertChord()} className='insert_chord'>insert chord</button>

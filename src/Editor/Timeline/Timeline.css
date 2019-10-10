@@ -4,7 +4,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 250px;
   }
   
   .play_stop_buttons {
@@ -12,14 +11,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-  }
-  
-  .player_timeline {
-    width: 500px;
-    height: 150px;
-    background-color: lightgrey;
-    display: flex;
-    flex-direction: row;
   }
   
   .chord_box {
@@ -69,6 +60,12 @@
     flex-direction: column;
   }
   
+.jump_buttons {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .highlighted {
   background-color: black;
   color: white;
@@ -98,6 +95,11 @@
 @media screen and (max-width: 700px) {
   .volume {
     margin-bottom: 16px;
+  }
+
+  .jump_buttons {
+    width: 300px;
+    margin-top: 10px;
   }
 }
 

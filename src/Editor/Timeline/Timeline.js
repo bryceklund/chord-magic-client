@@ -75,8 +75,35 @@ class Timeline extends Component {
         speed: 1.5,
         volume: 0.1,
         bpm: 160,
-        displayVolume: 25
+        displayVolume: 25,
+        loop: false
       }
+    }
+
+    displayOctave = (oct) => {
+      return oct === 'minusTwo' ? -2 : oct === 'minusOne' ? -1 : oct === 'zero' ? 0 : oct === 'one' ? 1 : oct === 'two' ? 2 : '' 
+    }
+
+    jumpToEnd = () => {
+      if (this.state.end < this.state.activeChords.length) {
+        this.setState({
+          end: this.state.activeChords.length,
+          init: this.state.activeChords.length - 4
+        }, () => this.setTimelineChords())
+      }
+    }
+
+    jumpToStart = () => {
+      this.setState({
+        end: 4,
+        init: 0
+      }, () => this.setTimelineChords())
+    }
+
+    toggleLoop = () => {
+      this.setState({
+        loop: !this.state.loop
+      })
     }
 
     setGlobalView = () => {
@@ -100,7 +127,6 @@ class Timeline extends Component {
     }
 
     jumpToChord = (index) => {
-      console.log(index)
       if (index < 4) {
         this.setState({
           end: 4,
@@ -115,7 +141,6 @@ class Timeline extends Component {
     }
 
     insertChord = (index, chord) => {
-      
       let newId
       let idx = index
       if (this.state.activeChords.length) {
@@ -137,7 +162,7 @@ class Timeline extends Component {
       this.jumpToChord(idx)
       this.setState({
         activeChords: tempArr,
-      }, this.setTimelineChords())
+      })
     }
 
     setSpeed = (speed) => {
@@ -173,7 +198,6 @@ class Timeline extends Component {
       const playChord = this.setActiveCell.bind()
       let counter = 0
       let playback = []
-
       while (counter < this.state.activeChords.length) {
         this.state.activeChords.forEach((chord, i) => {
           playback[i] = setTimeout(function() {
@@ -185,7 +209,7 @@ class Timeline extends Component {
       }
       this.setState({
         playback
-      })      
+      })
     }
 
     incrementTimeline = () => {
@@ -307,6 +331,7 @@ class Timeline extends Component {
             <div className='play_stop_buttons'>
               <button onClick={() => this.startPlayback()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={() => this.stopPlayback()}><img src='' alt='stop button' /></button>
+              {/*<button onClick={() => this.toggleLoop()}>Loop {this.state.loop ? 'on' : 'off'}</button>*/}
             </div>
             <div class='global_view'>{this.state.globalView}</div>
             <div className='player_timeline'>
@@ -328,7 +353,7 @@ class Timeline extends Component {
                                   : 'hidden'}`}>
                         <div className='info_label'>{this.state.timelineChords[0].scale}</div>
                         <div className='info_label'>{this.state.timelineChords[0].voice}</div>
-                        <div className='info_label'>{this.state.timelineChords[0].oct}</div> 
+                        <div className='info_label'>{this.displayOctave(this.state.timelineChords[0].oct)}</div> 
                       </section>
                     : ''}
                 </span>
@@ -363,7 +388,7 @@ class Timeline extends Component {
                                             : 'hidden'}`}>
                         <div className='info_label'>{this.state.timelineChords[1].scale}</div>
                         <div className='info_label'>{this.state.timelineChords[1].voice}</div>
-                        <div className='info_label'>{this.state.timelineChords[1].oct}</div> 
+                        <div className='info_label'>{this.displayOctave(this.state.timelineChords[1].oct)}</div> 
                       </section>
                     : ''}
                 </span>
@@ -396,7 +421,7 @@ class Timeline extends Component {
                                             : 'hidden'}`}>
                         <div className='info_label'>{this.state.timelineChords[2].scale}</div>
                         <div className='info_label'>{this.state.timelineChords[2].voice}</div>
-                        <div className='info_label'>{this.state.timelineChords[2].oct}</div> 
+                        <div className='info_label'>{this.displayOctave(this.state.timelineChords[2].oct)}</div> 
                       </section>
                     : ''}
                 </span>
@@ -429,7 +454,7 @@ class Timeline extends Component {
                                           : 'hidden'}`}>
                           <div className='info_label'>{this.state.timelineChords[3].scale}</div>
                           <div className='info_label'>{this.state.timelineChords[3].voice}</div>
-                          <div className='info_label'>{this.state.timelineChords[3].oct}</div> 
+                          <div className='info_label'>{this.displayOctave(this.state.timelineChords[3].oct)}</div> 
                         </section>
                       : ''}
                 </span>
@@ -457,6 +482,10 @@ class Timeline extends Component {
                   onChange={(e) => this.setSpeed(e.target.value)} />
               </div>
               <button onClick={() => this.incrementTimeline()}><img src='' alt='scrub right' /></button>
+            </div>
+            <div className='jump_buttons'>
+              <button onClick={() => this.jumpToStart()}>jump to beginning</button>
+              <button onClick={() => this.jumpToEnd()}>jump to end</button>
             </div>
           </section>
         );
