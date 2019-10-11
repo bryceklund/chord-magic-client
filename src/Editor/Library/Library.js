@@ -115,22 +115,29 @@ class Library extends Component {
                     </div>
                     <div className='instrument_container'>
                       instrument
-                      <label>
-                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sine' />
-                        <img class='wave_icon' src={require('../../icons/sine.png')} />
-                      </label>
-                      <label>
-                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='triangle' />
-                        <img class='wave_icon' src={require('../../icons/triangle.png')} />
-                      </label>
-                      <label>
-                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sawtooth' />
-                        <img class='wave_icon' src={require('../../icons/sawtooth.png')} />
-                      </label>
-                      <label>
-                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='square' />
-                        <img class='wave_icon' src={require('../../icons/square.png')} />
-                      </label>
+                      <div className='wave_icons_container'>
+                        <div className='sine_triangle'>
+                          <label>
+                            <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sine' />
+                            <img class='wave_icon' src={require('../../icons/sine.png')} />
+                          </label>
+                          <label>
+                            <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='triangle' defaultChecked />
+                            <img class='wave_icon' src={require('../../icons/triangle.png')} />
+                          </label>
+                        </div>
+                        <div  className='saw_square'>
+                          <label>
+                            <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sawtooth' />
+                            <img class='wave_icon' src={require('../../icons/sawtooth.png')} />
+                          </label>
+                          <label>
+                            <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='square' />
+                            <img class='wave_icon' src={require('../../icons/square.png')} />
+                          </label>
+                        </div>
+                      </div>
+
                       {/*<label className='instrument_label' htmlFor='instrument'>instrument:</label>
                       <select onChange={(e) => this.setVoice(e.target.value)} defaultValue='triangle' className='instrument' id='instrument'>
                         <option value='sine'><img class='wave_icon' src={require('../../icons/sine.png')} alt='sine wave' /></option>
