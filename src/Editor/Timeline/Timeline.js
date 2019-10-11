@@ -144,7 +144,7 @@ class Timeline extends Component {
       let newId
       let idx = index
       if (this.state.activeChords.length) {
-        const activeIds = this.state.activeChords.map(chord => chord.id).sort()
+        const activeIds = this.state.activeChords.map(chord => chord.id).sort((a, b) => a - b)
         newId = activeIds[activeIds.length - 1] + 1
       } else {
         newId = 0

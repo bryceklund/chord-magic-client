@@ -106,7 +106,6 @@ class Library extends Component {
       console.log(process.cwd())
         return (
             <section className='library_container'>
-              <img src='src/icons/sine' />
             <div className='library_settings'>
                 <div className='settings'>
                   <div className='oct_ins_pre'>
@@ -115,37 +114,34 @@ class Library extends Component {
                       <label className='prehear_label' htmlFor='prehear'>prehear</label>
                     </div>
                     <div className='instrument_container'>
-                      <label className='instrument_label' htmlFor='instrument'>instrument:</label>
+                      instrument
+                      <label>
+                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sine' />
+                        <img class='wave_icon' src={require('../../icons/sine.png')} />
+                      </label>
+                      <label>
+                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='triangle' />
+                        <img class='wave_icon' src={require('../../icons/triangle.png')} />
+                      </label>
+                      <label>
+                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sawtooth' />
+                        <img class='wave_icon' src={require('../../icons/sawtooth.png')} />
+                      </label>
+                      <label>
+                        <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='square' />
+                        <img class='wave_icon' src={require('../../icons/square.png')} />
+                      </label>
+                      {/*<label className='instrument_label' htmlFor='instrument'>instrument:</label>
                       <select onChange={(e) => this.setVoice(e.target.value)} defaultValue='triangle' className='instrument' id='instrument'>
-                        <option value='sine'><img src='./icons/sine.png' alt='sine wave' /></option>
+                        <option value='sine'><img class='wave_icon' src={require('../../icons/sine.png')} alt='sine wave' /></option>
                         <option value='triangle'>triangle</option>
                         <option value='square'>square</option>
                         <option value='sawtooth'>saw</option>
-                      </select>
+                      </select>*/}
                     </div>
                     <div className='octave_container'>
                       <label htmlFor='octave'>octave: {this.state.displayOctave || 0}</label><br />
                       <input name="octave" className="octave" type="range" onChange={(e) => this.setOct(e.target.value)} min="-2" max="2" defaultValue="0" />
-                      {/*<div className='octave_div'>
-                        <label htmlFor='-2'>-2</label>
-                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='minusTwo' id='-2' />
-                      </div>
-                      <div className='octave_div'>
-                        <label htmlFor='-1'>-1</label>
-                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='minusOne' id='-1' />
-                      </div>
-                      <div className='octave_div'>
-                        <label htmlFor='0'>0</label>
-                        <input onChange={(e) => this.setOct(e.target.value)} defaultChecked='true' type='radio' name='octave' value='zero' id='0' />
-                      </div>
-                      <div className='octave_div'>
-                        <label htmlFor='1'>1</label>
-                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='plusOne' id='1' />
-                      </div>
-                      <div className='octave_div'>
-                        <label htmlFor='2'>2</label>
-                        <input onChange={(e) => this.setOct(e.target.value)} type='radio' name='octave' value='plusTwo' id='2' />
-        </div>*/}
                     </div>
                   </div>
                   <button disabled={!this.props.selected} onClick={() => this.props.insertChord()} className='insert_chord'>insert chord</button>
