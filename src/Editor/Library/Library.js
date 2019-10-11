@@ -103,8 +103,10 @@ class Library extends Component {
     }
 
     render() {
+      console.log(process.cwd())
         return (
             <section className='library_container'>
+              <img src='src/icons/sine' />
             <div className='library_settings'>
                 <div className='settings'>
                   <div className='oct_ins_pre'>
@@ -115,7 +117,7 @@ class Library extends Component {
                     <div className='instrument_container'>
                       <label className='instrument_label' htmlFor='instrument'>instrument:</label>
                       <select onChange={(e) => this.setVoice(e.target.value)} defaultValue='triangle' className='instrument' id='instrument'>
-                        <option value='sine'>sine</option>
+                        <option value='sine'><img src='./icons/sine.png' alt='sine wave' /></option>
                         <option value='triangle'>triangle</option>
                         <option value='square'>square</option>
                         <option value='sawtooth'>saw</option>
