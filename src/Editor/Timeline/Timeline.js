@@ -94,6 +94,7 @@ class Timeline extends Component {
     }
 
     jumpToStart = () => {
+      this.unHighlightPlus()
       this.setState({
         end: 4,
         init: 0
@@ -143,7 +144,7 @@ class Timeline extends Component {
     insertChord = (index, chord) => {
       let newId
       let idx = index
-      if (this.state.activeChords.length) {
+      if (this.state.activeChords.length > 0) {
         const activeIds = this.state.activeChords.map(chord => chord.id).sort((a, b) => a - b)
         newId = activeIds[activeIds.length - 1] + 1
       } else {
