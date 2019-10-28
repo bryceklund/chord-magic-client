@@ -1,3 +1,44 @@
+const { API_BASE_URL, API_TOKEN } = require('../config')
+const chordsUrl = `${API_BASE_URL}/chords`
+const scalesUrl = `${API_BASE_URL}/scales`
+const options = {
+    method: 'GET',
+    headers: new Headers({
+      'Authorization': `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json'
+    })
+  }
+
+let chords
+let scales
+let final = {}
+
+fetch(chordsUrl, options)
+  .then(data => data.json())
+  .then(data => chords = data)
+  .then(data => {
+    fetch(scalesUrl, options)
+        .then(data => data.json())
+        .then(data => scales = data)
+        .then(data => {
+            scales.map((scale, i) => {
+                final[scale] = []
+            })
+        })
+        .then(data => {
+            scales.forEach((scale, i) => {
+                chords.map((chord, i) => {
+                    fetch(`${API_BASE_URL}/chord/${scale}/${chord}`, options)
+                        .then(data => data.json())
+                        .then(data => final[scale][chord] = data)
+                })
+            })
+        })
+        .then(data => AudioStore.chords = final)
+        .then(data => console.log(AudioStore))
+  })
+
+
 const AudioStore = {
     notes: {
         minusTwo: {
@@ -82,7 +123,7 @@ const AudioStore = {
             Eb: ['Eb', 'G', 'Bb'],
             E: ['E', 'Ab', 'B'],
             F: ['F', 'A', 'C'],
-            Gb: ['Gb', 'Bb', 'Bb'],
+            Gb: ['Gb', 'Bb', 'Db'],
             G: ['G', 'B', 'D'],
             Ab: ['Ab', 'C', 'Eb'],
         },

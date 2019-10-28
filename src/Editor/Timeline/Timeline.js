@@ -11,58 +11,58 @@ class Timeline extends Component {
                         : [
                             {
                               id: 0,
-                              name: 'G',
-                              scale: 'maj',
-                              oct: 'minusTwo',
-                              voice: 'sawtooth',
+                              name: "G",
+                              scale: "maj",
+                              oct: "minusTwo",
+                              voice: "sawtooth",
                               active: false
                             }, 
                             {
                               id: 1,
-                              name: 'B',
-                              scale: 'maj',
-                              oct: 'minusTwo',
-                              voice: 'sawtooth',
+                              name: "B",
+                              scale: "maj",
+                              oct: "minusTwo",
+                              voice: "sawtooth",
                               active: false
                             }, 
                             {
                               id: 2,
-                              name: 'E',
-                              scale: 'min',
-                              oct: 'minusTwo',
-                              voice: 'sawtooth',
+                              name: "E",
+                              scale: "min",
+                              oct: "minusTwo",
+                              voice: "sawtooth",
                               active: false
                             }, 
                             {
                               id: 3,
-                              name: 'C',
-                              scale: 'maj',
-                              oct: 'minusTwo',
-                              voice: 'sawtooth',
+                              name: "C",
+                              scale: "maj",
+                              oct: "minusTwo",
+                              voice: "sawtooth",
                               active: false
                             }, 
                             {
                               id: 4,
-                              name: 'G',
-                              scale: 'maj',
-                              oct: 'minusTwo',
-                              voice: 'sawtooth',
+                              name: "G",
+                              scale: "maj",
+                              oct: "minusTwo",
+                              voice: "sawtooth",
                               active: false
                             }, 
                             {
                               id: 5,
-                              name: 'B',
-                              scale: 'min',
-                              oct: 'minusTwo',
-                              voice: 'sawtooth',
+                              name: "B",
+                              scale: "min",
+                              oct: "minusTwo",
+                              voice: "sawtooth",
                               active: false
                             }, 
                             {
                               id: 6,
-                              name: 'C',
-                              scale: 'maj',
-                              oct: 'minusTwo',
-                              voice: 'sawtooth',
+                              name: "C",
+                              scale: "maj",
+                              oct: "minusTwo",
+                              voice: "sawtooth",
                               active: false
                             }
                           ],
@@ -81,6 +81,7 @@ class Timeline extends Component {
     }
 
     displayOctave = (oct) => {
+      //converts octave from string to number
       return oct === 'minusTwo' ? -2 : oct === 'minusOne' ? -1 : oct === 'zero' ? 0 : oct === 'one' ? 1 : oct === 'two' ? 2 : '' 
     }
 
@@ -329,12 +330,14 @@ class Timeline extends Component {
     render() {
         return (
             <section className='timeline'>
+            <div className={`${this.props.currentName ? "prog_name" : "hidden"}`}>now editing: "{this.props.currentName}"</div>
+
             <div className='play_stop_buttons'>
               <button onClick={() => this.startPlayback()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={() => this.stopPlayback()}><img src='' alt='stop button' /></button>
               {/*<button onClick={() => this.toggleLoop()}>Loop {this.state.loop ? 'on' : 'off'}</button>*/}
             </div>
-            <div class='global_view'>{this.state.globalView}</div>
+            <div className='global_view'>{this.state.globalView}</div>
             <div className='player_timeline'>
 
             <div className={`chord_box one`}>

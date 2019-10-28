@@ -1,0 +1,12 @@
+.response {
+    position: absolute;
+    text-align: center;
+}
+
+.success {
+    color: green;
+}
+
+.failure {
+    color: red;
+}

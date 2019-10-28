@@ -9,7 +9,6 @@ function Synth(voice, oct, dur, vol, scale, chordName) {
 
     //notes in this chord
     const chord = AudioStore.chords[scale][chordName]
-
     //create enough oscillators
     let synth = []
     for (let i = 0; i < chord.length; i++) {

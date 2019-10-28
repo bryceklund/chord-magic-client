@@ -92,6 +92,10 @@
   font-size: 15px;
 }
 
+.prog_name {
+  margin-bottom: 15px;
+}
+
 @media screen and (max-width: 700px) {
   .volume {
     margin-bottom: 16px;

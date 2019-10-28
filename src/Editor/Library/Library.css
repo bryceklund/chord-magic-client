@@ -267,7 +267,7 @@ nav {
   display: none;
 }
 
-.save_tooltip {
+.new_save_tooltip, .update_tooltip {
   position: absolute;
   background-color: white;
   border: 1px solid black;
@@ -292,6 +292,12 @@ nav {
 .selected {
     color: white;
     background-color: black;
+}
+
+.save_cancel {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .hidden {
@@ -348,7 +354,7 @@ nav {
     height: 100%
   }
 
-  .save_tooltip {
+  .new_save_tooltip, .update_tooltip {
     bottom: initial;
   }
 

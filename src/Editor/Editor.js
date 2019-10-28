@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import Timeline from './Timeline/Timeline.js';
-import Library from './Library/Library.js';
-import Nav from '../Nav/Nav.js';
+import React, { Component } from 'react'
+import Timeline from './Timeline/Timeline.js'
+import Library from './Library/Library.js'
+import { API_BASE_URL, API_TOKEN } from '../config'
+import './Editor.css'
 
 class Editor extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class Editor extends Component {
             librarySelection: false,
             timelineSelection: false,
             selectedChord: {},
-            selectedIndex: null
+            selectedIndex: null,
+            response: ''
         }
     }
 
@@ -77,12 +79,76 @@ class Editor extends Component {
         })
     }
 
+    saveNew = (name) => {
+        const chords = this.timelineElement.current.state.activeChords.map((chord, i) => chord = {...chord, id: i})
+        const url = `${API_BASE_URL}/progressions/${this.props.userid}`
+        const options = {
+          method: 'POST',
+          headers: new Headers({
+            'Authorization': `Bearer ${API_TOKEN}`,
+            'Content-Type': 'application/json'
+          }),
+          body: JSON.stringify({
+            name: name,
+            chords
+          })
+        }
+        let id
+        //post to db
+        fetch(url, options)
+            .then(res => res.text())
+            .then(res => {
+                if (res.length) {
+                    this.libraryElement.current.saveSuccess()
+                    id = res
+                } else {
+                    this.libraryElement.current.saveFail()
+                }
+            })
+            .then(res => this.props.setCurrentProg(name, id))
+      }
+
+      saveExisting = () => {
+        const chords = this.timelineElement.current.state.activeChords.map((chord, i) => chord = {...chord, id: i})
+        const id = this.props.currentId
+        const url = `${API_BASE_URL}/progressionchords/${id}`
+        const options = {
+          method: 'PATCH',
+          headers: new Headers({
+            'Authorization': `Bearer ${API_TOKEN}`,
+            'Content-Type': 'application/json'
+          }),
+          body: JSON.stringify({
+            chords
+          })
+        }
+        fetch(url, options)
+            .then(res => {
+                if (res.ok) {
+                    this.libraryElement.current.saveSuccess()
+                } else {
+                    this.libraryElement.current.saveFail()
+                }
+            })
+            
+      }
+
     render() {
         return (
             <React.Fragment>
-                <Nav signOut={this.props.signOut} signedIn={this.props.signedIn} />
-                <Timeline ref={this.timelineElement} progression={this.props.progression} chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
-                <Library signedIn={this.props.signedIn} selected={this.state.librarySelection} ref={this.libraryElement} insertChord={this.insertChord} chordSelected={this.toggleLibrarySelection} storeChord={this.updateSelectedChord} resetSelection={this.clearSelectedChord} />
+                <Timeline ref={this.timelineElement} currentName={this.props.currentName} progression={this.props.progression} chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
+                <Library 
+                    setProgName={this.props.setProgName} 
+                    signedIn={this.props.signedIn} 
+                    saveNew={this.saveNew}
+                    saveExisting={this.saveExisting}
+                    currentName={this.props.currentName} 
+                    selected={this.state.librarySelection} 
+                    ref={this.libraryElement} 
+                    insertChord={this.insertChord} 
+                    chordSelected={this.toggleLibrarySelection} 
+                    storeChord={this.updateSelectedChord} 
+                    resetSelection={this.clearSelectedChord} />
             </React.Fragment>
         );
     }

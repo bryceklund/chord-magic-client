@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Synth from '../Synth.js'
+import { API_BASE_URL, API_TOKEN } from '../../config'
 import './Library.css'
 
 class Library extends Component {
@@ -12,7 +13,9 @@ class Library extends Component {
             octave: 'zero',
             displayOctave: '',
             voice: 'triangle',
-            prehear: false
+            prehear: false,
+            newName: '',
+            response: ''
         }
     }
 
@@ -90,7 +93,6 @@ class Library extends Component {
 
     setScale = (scale) => {
         this.toggleHidden()
-        console.log(this.state.scale)
         this.setState({
             scale: scale.toLowerCase()
         })
@@ -102,8 +104,61 @@ class Library extends Component {
         },  this.highlightSelection(target))
     }
 
+    setNewName = (name) => {
+      this.setState({
+        newName: name
+      })
+    }
+
+    showUpdateTooltip = () => {
+      document.getElementById('update_tooltip').classList.remove('hidden')
+    }
+
+    showSaveNewTooltip = () => {
+      document.getElementById('new_save_tooltip').classList.remove('hidden')
+    }  
+
+    hideTooltip = () => {
+      document.getElementById('new_save_tooltip').classList.add('hidden')
+      document.getElementById('update_tooltip').classList.add('hidden')
+    }
+
+    checkIfNew = () => {
+      if (this.props.currentName) {
+        this.showUpdateTooltip()
+      } else {
+        this.showSaveNewTooltip()
+      }
+    }
+
+    saveSuccess = () => {
+      this.hideTooltip()
+      this.setState({
+          response: 'Progression saved!'
+      })
+        document.getElementById('response').classList.remove('hidden')
+        setTimeout(function() {
+          try {
+            document.getElementById('response').classList.add('hidden')
+          } catch {}
+        }, 3000)
+    }
+
+    saveFail = () => {
+      this.hideTooltip()
+      this.setState({
+          response: 'Progression failed to save.'
+      })
+        document.getElementById('response').classList.remove('hidden')
+        setTimeout(function() {
+          try {
+            document.getElementById('response').classList.add('hidden')
+          } catch {}
+        }, 3000)
+    }
+
+
     render() {
-      console.log(process.cwd())
         return (
             <section className='library_container'>
             <div className='library_settings'>
@@ -119,28 +174,28 @@ class Library extends Component {
                         <div className='sine_triangle'>
                           <label>
                             <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sine' />
-                            <img class='wave_icon' src={require('../../icons/sine.png')} />
+                            <img className='wave_icon' src={require('../../icons/sine.png')} />
                           </label>
                           <label>
                             <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='triangle' defaultChecked />
-                            <img class='wave_icon' src={require('../../icons/triangle.png')} />
+                            <img className='wave_icon' src={require('../../icons/triangle.png')} />
                           </label>
                         </div>
                         <div  className='saw_square'>
                           <label>
                             <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='sawtooth' />
-                            <img class='wave_icon' src={require('../../icons/sawtooth.png')} />
+                            <img className='wave_icon' src={require('../../icons/sawtooth.png')} />
                           </label>
                           <label>
                             <input onClick={(e) => this.setVoice(e.target.value)} type='radio' name='voice' value='square' />
-                            <img class='wave_icon' src={require('../../icons/square.png')} />
+                            <img className='wave_icon' src={require('../../icons/square.png')} />
                           </label>
                         </div>
                       </div>
 
                       {/*<label className='instrument_label' htmlFor='instrument'>instrument:</label>
                       <select onChange={(e) => this.setVoice(e.target.value)} defaultValue='triangle' className='instrument' id='instrument'>
-                        <option value='sine'><img class='wave_icon' src={require('../../icons/sine.png')} alt='sine wave' /></option>
+                        <option value='sine'><img className='wave_icon' src={require('../../icons/sine.png')} alt='sine wave' /></option>
                         <option value='triangle'>triangle</option>
                         <option value='square'>square</option>
                         <option value='sawtooth'>saw</option>
@@ -153,21 +208,34 @@ class Library extends Component {
                   </div>
                   <button disabled={!this.props.selected} onClick={() => this.props.insertChord()} className='insert_chord'>insert chord</button>
                 {this.props.signedIn 
-                    ? <button className='save_progression'>save progression</button>
+                    ? <button onClick={() => this.checkIfNew()} className='save_progression'>save progression</button>
                     : <p className='login_message'>Log in to save your progression!</p>}
+                <div className='new_save_tooltip response hidden' id='response'>{this.state.response}</div>
+                <div className='update_tooltip hidden' id='update_tooltip'>
+
+                    <button onClick={() => this.showSaveNewTooltip()} className='save'>Save as new</button><button onClick={() => this.props.saveExisting()} className='save'>Overwrite existing</button><button className='save' onClick={() => this.hideTooltip()} >Cancel</button>
+
+                </div>
+                <div className='new_save_tooltip hidden' id='new_save_tooltip'>
+                  <label htmlFor='prog_name'>Name:</label>
+                  <input onChange={(e) => this.setNewName(e.target.value)} type='text' id='prog_name' />
+                  <div className='save_cancel'>
+                    <button onClick={() => this.props.saveNew(this.state.newName)} className='save'>Save</button><button className='save' onClick={() => this.hideTooltip()}>Cancel</button>
+                  </div>
+                </div>
               </div>
               <div className='library'>
                   <button className={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>
                 <ul className={`scales ${this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min</li>
-                    {/*<li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj7</li>
+                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj7</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min7</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Dim</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Dom7</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Sus2</li>
                     <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Sus4</li>
-                <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>*/}
+                  <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>
                 </ul>
                 <ul className={`scales chords ${!this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>A</li>
