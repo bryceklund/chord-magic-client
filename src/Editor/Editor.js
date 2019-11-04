@@ -18,6 +18,10 @@ class Editor extends Component {
         }
     }
 
+    refresh = () => {
+        this.forceUpdate()
+    }
+
     loadProgression = () => {
         this.timelineElement.current.loadProgression(this.props.progression)
     }

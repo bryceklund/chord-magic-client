@@ -35,7 +35,6 @@ fetch(chordsUrl, options)
             })
         })
         .then(data => AudioStore.chords = final)
-        .then(data => console.log(AudioStore))
   })
 
 
@@ -112,36 +111,7 @@ const AudioStore = {
             Ab: 3322.44
         }
     },
-    chords: {
-        maj: {
-            A: ['A', 'Db', 'E'],
-            Bb: ['Bb', 'D', 'F'],
-            B: ['B', 'Eb', 'Gb'],
-            C: ['C', 'E', 'G'],
-            Db: ['Db', 'F', 'Ab'],
-            D: ['D', 'Gb', 'A'],
-            Eb: ['Eb', 'G', 'Bb'],
-            E: ['E', 'Ab', 'B'],
-            F: ['F', 'A', 'C'],
-            Gb: ['Gb', 'Bb', 'Db'],
-            G: ['G', 'B', 'D'],
-            Ab: ['Ab', 'C', 'Eb'],
-        },
-        min: {
-            A: ['A', 'C', 'E'],
-            Bb: ['Bb', 'Db', 'F'],
-            B: ['B', 'D', 'Gb'],
-            C: ['C', 'Eb', 'G'],
-            Db: ['Db', 'E', 'Ab'],
-            D: ['D', 'F', 'A'],
-            Eb: ['Eb', 'Gb', 'Bb'],
-            E: ['E', 'G', 'B'],
-            F: ['F', 'Ab', 'C'],
-            Gb: ['Gb', 'A', 'Db'],
-            G: ['G', 'Bb', 'D'],
-            Ab: ['Ab', 'B', 'Eb'],
-        }
-    }
+    chords: {}
 }
 
 module.exports = AudioStore;
