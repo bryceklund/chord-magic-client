@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav.js';
 import { Link } from 'react-router-dom';
 import Synth from '../Editor/Synth.js'
 import { API_BASE_URL, API_TOKEN } from '../config'
+import TokenService from '../services/tokenService'
 import './SavedProgressions.css';
 
 /*progressions: {
@@ -188,7 +189,8 @@ class SavedProgressions extends Component {
         this.state = {
             progressions: [],
             selected: null,
-            playback: []
+            playback: [],
+            error: ''
         }
     }
     
@@ -254,7 +256,7 @@ class SavedProgressions extends Component {
       const options = {
         method: 'DELETE',
         headers: new Headers({
-          'Authorization': `Bearer ${API_TOKEN}`,
+          'Authorization': `Bearer ${API_TOKEN} ${TokenService.getAuthToken()}`,
           'Content-Type': 'application/json'
         })
       }
@@ -274,14 +276,15 @@ class SavedProgressions extends Component {
     }
 
     componentDidMount() {
-      const progsUrl = `${API_BASE_URL}/progressions/${this.props.userid || '001'}`
+      const progsUrl = `${API_BASE_URL}/progressions/saved`
       const options = {
         method: 'GET',
         headers: new Headers({
-          'Authorization': `Bearer ${API_TOKEN}`,
-          'Content-Type': 'application/json'
+          'Authorization': `Bearer ${API_TOKEN} ${TokenService.getAuthToken()}`,
+          'Content-Type': 'application/json',
         })
       }
+
       fetch(progsUrl, options)
         .then(result => result.json())
         .then(data => this.setProgList(data))
@@ -292,33 +295,38 @@ class SavedProgressions extends Component {
               .then(data => this.setChords(data, i))
           })
         })
-        // add catches + error handling here
+        .catch(error => console.log(error))
       }
     render() {
-        const progs = this.state.progressions.map((p, i) => {
-            return <li className='progression'><button className='prog_button' id={p.id} onClick={(e) => {this.select(p, e.target)}}>{p.name}</button></li>
-        })
-        return (
-            <React.Fragment>
-                <Nav signOut={this.props.signOut} signedIn={this.props.signedIn} />
-                <section className='library_container'>
-                    <div className='library_settings'>
-                        <div className='saved_settings'>
-                            <button onClick={() => {this.startPlayback()}} className='play_progression'>play</button>
-                            <button onClick={() => {this.stopPlayback()}} className='stop_progression'>stop</button>
-                            <Link className={`${!this.state.selected ? 'hidden' : ''}`} to='/editor'><button onClick={() => {this.props.loadProgression(this.state.progressions.find(prog => prog.id === this.state.selected))}} className='load_progression'>load</button></Link>
-                            <button onClick={() => {this.deleteProgression()}} className={`delete_progression ${!this.state.selected ? 'hidden' : ''}`}>delete</button>
-                            <Link to='/editor' className='back_progression'><button>back to editor</button></Link>
+        const progs = this.state.progressions.length 
+                        ? this.state.progressions.map((p, i) => {
+                            return <li className='progression'><button className='prog_button' id={p.id} onClick={(e) => {this.select(p, e.target)}}>{p.name}</button></li>
+                        })
+                        : <p className='no_progs'>Save a chord progression to access it here!</p>
+
+            return TokenService.hasAuthToken()
+              ?  (
+                  <React.Fragment>
+                    <section className='library_container'>
+                        <div className='library_settings'>
+                            <div className='saved_settings'>
+                                <button onClick={() => {this.startPlayback()}} className={`play_progression ${this.state.progressions.length ? '' : 'hidden'}`}>play</button>
+                                <button className={this.state.progressions.length ? '' : 'hidden'} onClick={() => {this.stopPlayback()}} className={`stop_progression ${this.state.progressions.length ? '' : 'hidden'}`}>stop</button>
+                                <Link className={`${!this.state.selected ? 'hidden' : ''}`} to='/editor'><button onClick={() => {this.props.loadProgression(this.state.progressions.find(prog => prog.id === this.state.selected))}} className='load_progression'>load</button></Link>
+                                <button onClick={() => {this.deleteProgression()}} className={`delete_progression ${!this.state.selected ? 'hidden' : ''}`}>delete</button>
+                                <Link to='/editor' className='back_progression'><button>back to editor</button></Link>
+                            </div>
+                            <div className='saved_library'>
+                                <ul className='progressions'>
+                                    {progs}
+                                </ul>
+                            </div>
                         </div>
-                        <div className='saved_library'>
-                            <ul className='progressions'>
-                                {progs}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </React.Fragment>
-        );
+                    </section>
+                  </React.Fragment>
+                  )
+              : <div className='forbidden'>You must be signed in to view this page.</div>
+              
     }
 }
 

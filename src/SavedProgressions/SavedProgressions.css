@@ -55,6 +55,13 @@
     height: 30px;
 }
 
+.forbidden {
+    color: red;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 100px;
+}
+
 @media screen and (max-width: 700px) {
     .saved_settings {
         height: 15%;

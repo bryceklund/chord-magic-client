@@ -3,6 +3,7 @@ import Timeline from './Timeline/Timeline.js'
 import Library from './Library/Library.js'
 import { API_BASE_URL, API_TOKEN } from '../config'
 import './Editor.css'
+import TokenService from '../services/tokenService.js'
 
 class Editor extends Component {
     constructor(props) {
@@ -85,11 +86,11 @@ class Editor extends Component {
 
     saveNew = (name) => {
         const chords = this.timelineElement.current.state.activeChords.map((chord, i) => chord = {...chord, id: i})
-        const url = `${API_BASE_URL}/progressions/${this.props.userid}`
+        const url = `${API_BASE_URL}/progressions/saved`
         const options = {
           method: 'POST',
           headers: new Headers({
-            'Authorization': `Bearer ${API_TOKEN}`,
+            'Authorization': `Bearer ${API_TOKEN} ${TokenService.getAuthToken()}`,
             'Content-Type': 'application/json'
           }),
           body: JSON.stringify({

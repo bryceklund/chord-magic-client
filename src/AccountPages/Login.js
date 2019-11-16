@@ -39,7 +39,7 @@ class Login extends Component {
 
     render() {
         return (
-            <body>
+            <React.Fragment>
                 <section className='login'>
                     <form className='login_form' onSubmit={(e) => this.props.signIn(this.state.username, this.state.password, e)}>
                         <fieldset>
@@ -53,7 +53,7 @@ class Login extends Component {
                     </form>
                     <p id='error' className='error hidden'>{this.state.error}</p>
                 </section>
-            </body>
+            </React.Fragment>
         );
     }
 }
