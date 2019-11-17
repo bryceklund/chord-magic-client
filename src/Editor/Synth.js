@@ -1,8 +1,20 @@
 const AudioStore = require('./AudioStore.js')
+const AudioUnlock = require('web-audio-touch-unlock')
 
 function Synth(voice, oct, dur, vol, scale, chordName) {
     //create instance of the API
     const context = new AudioContext()
+
+    AudioUnlock(context)
+        .then(function (unlocked) {
+            if(unlocked) {
+                // AudioContext was unlocked from an explicit user action, sound should start playing now
+            } else {
+                // There was no need for unlocking, devices other than iOS
+            }
+        }, function(reason) {
+            console.error(reason)
+        })
     
     //notes in this octave
     const notes = AudioStore.notes[oct]
