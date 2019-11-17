@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
-import { Route, Link, Switch } from 'react-router-dom'
+import { Router, Route, Link, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import SplashPage from './SplashPage/SplashPage.js'
 import Login from './AccountPages/Login.js'

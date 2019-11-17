@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account Pages login matches its snapshot 1`] = `
+<section
+  className="login"
+>
+  <form
+    className="login_form"
+    onSubmit={[Function]}
+  >
+    <fieldset>
+      <legend>
+        <h3>
+          Login
+        </h3>
+      </legend>
+      <label
+        htmlFor="username"
+      >
+        Username:
+      </label>
+      <input
+        id="username"
+        onChange={[Function]}
+        type="text"
+      />
+      <label
+        htmlFor="password"
+      >
+        Password:
+      </label>
+      <input
+        id="password"
+        onChange={[Function]}
+        type="password"
+      />
+      <button
+        disabled={true}
+        type="submit"
+      >
+        Submit
+      </button>
+    </fieldset>
+  </form>
+  <p
+    className="error hidden"
+    id="error"
+  >
+    
+  </p>
+</section>
+`;
+
+exports[`Account Pages register matches its snapshot 1`] = `
+<body>
+  <nav>
+    <h1>
+      <a
+        href="/editor"
+        onClick={[Function]}
+      >
+        Chord Magic
+      </a>
+    </h1>
+    <a
+      href="/editor"
+      onClick={[Function]}
+    >
+      <img
+        alt="chord magic logo"
+        src=""
+      />
+    </a>
+    <div
+      className="login_links"
+    >
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+       
+      <a
+        href="/register"
+        onClick={[Function]}
+      >
+        Register
+      </a>
+    </div>
+  </nav>
+  <section
+    className="login"
+  >
+    <form
+      className="login_form"
+      onSubmit={[Function]}
+    >
+      <fieldset>
+        <legend>
+          <h3>
+            Register
+          </h3>
+        </legend>
+        <label
+          htmlFor="username"
+        >
+          Desired Username:
+        </label>
+        <input
+          id="username"
+          onChange={[Function]}
+          type="text"
+        />
+        <label
+          htmlFor="password"
+        >
+          Password:
+        </label>
+        <input
+          id="password_one"
+          onChange={[Function]}
+          type="password"
+        />
+        <label
+          htmlFor="password"
+        >
+          Repeat Password:
+        </label>
+        <input
+          id="password"
+          onChange={[Function]}
+          type="password"
+        />
+        <p
+          className="error "
+        />
+        <button
+          disabled={true}
+          type="submit"
+        >
+          Submit
+        </button>
+      </fieldset>
+    </form>
+  </section>
+</body>
+`;

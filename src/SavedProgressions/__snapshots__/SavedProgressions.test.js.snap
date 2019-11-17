@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SavedProgressions matches its snapshot 1`] = `
+<div
+  className="forbidden"
+>
+  You must be signed in to view this page.
+</div>
+`;

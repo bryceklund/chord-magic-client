@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav matches its snapshot 1`] = `
+<nav>
+  <h1>
+    <a
+      href="/editor"
+      onClick={[Function]}
+    >
+      Chord Magic
+    </a>
+  </h1>
+  <a
+    href="/editor"
+    onClick={[Function]}
+  >
+    <img
+      alt="chord magic logo"
+      src=""
+    />
+  </a>
+  <div
+    className="login_links"
+  >
+    <a
+      href="/login"
+      onClick={[Function]}
+    >
+      Login
+    </a>
+     
+    <a
+      href="/register"
+      onClick={[Function]}
+    >
+      Register
+    </a>
+  </div>
+</nav>
+`;
