@@ -5,6 +5,7 @@ function Synth(voice, oct, dur, vol, scale, chordName) {
     //create instance of the API
     const context = new (window.AudioContext || window.webkitAudioContext)()
 
+    /*
     AudioUnlock(context)
         .then(function (unlocked) {
             if(unlocked) {
@@ -15,6 +16,7 @@ function Synth(voice, oct, dur, vol, scale, chordName) {
         }, function(reason) {
             console.error(reason)
         })
+        */
     
     //notes in this octave
     const notes = AudioStore.notes[oct]
