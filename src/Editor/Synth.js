@@ -3,7 +3,7 @@ const AudioUnlock = require('web-audio-touch-unlock')
 
 function Synth(voice, oct, dur, vol, scale, chordName) {
     //create instance of the API
-    const context = new AudioContext()
+    const context = new (window.AudioContext || window.webkitAudioContext)()
 
     AudioUnlock(context)
         .then(function (unlocked) {
