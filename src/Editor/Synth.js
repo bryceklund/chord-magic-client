@@ -1,30 +1,12 @@
 const AudioStore = require('./AudioStore.js')
+const unmute = require('./unmute')
 const AudioUnlock = require('web-audio-touch-unlock')
-
-function webAudioTouchUnlock(context)
-{
-    if (context.state === 'suspended' && 'ontouchstart' in window)
-    {
-        var unlock = function()
-        {
-            context.resume().then(function()
-            {
-                document.body.removeEventListener('touchstart', unlock);
-                document.body.removeEventListener('touchend', unlock);
-            });
-        };
-
-        document.body.addEventListener('touchstart', unlock, false);
-        document.body.addEventListener('touchend', unlock, false);
-    }
-}
 
 function Synth(voice, oct, dur, vol, scale, chordName) {
     //create instance of the API
     const context = new (window.AudioContext || window.webkitAudioContext)()
 
-    
-    webAudioTouchUnlock(context)
+    unmute(context)
 
     //notes in this octave
     const notes = AudioStore.notes[oct]
