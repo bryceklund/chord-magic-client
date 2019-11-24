@@ -96,6 +96,19 @@
   margin-bottom: 15px;
 }
 
+.playback_error {
+  color: red;
+  text-align: center;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.note_container {
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 700px) {
   .volume {
     margin-bottom: 16px;

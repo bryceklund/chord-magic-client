@@ -114,4 +114,4 @@ const AudioStore = {
     chords: {}
 }
 
-module.exports = AudioStore;
+module.exports = AudioStore

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Synth from '../Synth.js'
+import Spinner from '../../Spinner.js'
 import './Timeline.css';
 
 class Timeline extends Component {
@@ -76,7 +77,8 @@ class Timeline extends Component {
         volume: 0.1,
         bpm: 160,
         displayVolume: 25,
-        loop: false
+        loop: false,
+        error: false
       }
     }
 
@@ -192,12 +194,31 @@ class Timeline extends Component {
       this.play()
     }
 
+    showError = () => {
+      this.setState({
+        error: true
+      })
+      setTimeout(() => {
+        this.hideError()
+      }, 4000)
+
+    }
+
+    hideError = () => {
+      this.setState({
+        error: false
+      })
+    }
+
     play = () => {
       this.setTimelineChords()
       const duration = this.state.speed
       const volume = this.state.volume
       const updateComponent = this.setTimelineChords.bind()
       const playChord = this.setActiveCell.bind()
+      const showError = this.showError.bind()
+      const hideError = this.hideError.bind()
+      const stopPlayback = this.stopPlayback.bind()
       let counter = 0
       let playback = []
       while (counter < this.state.activeChords.length) {
@@ -205,7 +226,13 @@ class Timeline extends Component {
           playback[i] = setTimeout(function() {
             playChord(chord.id)
             updateComponent()
-            Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name)}, i * (duration * 1000))
+            try {
+              hideError()
+              Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name)
+            } catch(error) {
+              stopPlayback()
+              showError()
+            }}, i * (duration * 1000))
             counter++
         })
       }
@@ -331,7 +358,8 @@ class Timeline extends Component {
         return (
             <section className='timeline'>
             <div className={`${this.props.currentName ? "prog_name" : "hidden"}`}>now editing: "{this.props.currentName}"</div>
-
+              <div className={`${this.state.error ? 'playback_error' : 'hidden'}`}><Spinner active={this.state.error} />
+              Oops, try again in a few seconds...</div> 
             <div className='play_stop_buttons'>
               <button onClick={() => this.startPlayback()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={() => this.stopPlayback()}><img src='' alt='stop button' /></button>

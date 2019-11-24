@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Timeline from './Timeline/Timeline.js'
 import Library from './Library/Library.js'
 import { API_BASE_URL, API_TOKEN } from '../config'
+import TimelineError from './Timeline/TimelineError.js'
 import './Editor.css'
 import TokenService from '../services/tokenService.js'
 
@@ -141,7 +142,13 @@ class Editor extends Component {
     render() {
         return (
             <React.Fragment>
-                <Timeline ref={this.timelineElement} currentName={this.props.currentName} progression={this.props.progression} chordSelected={this.toggleTimelineSelection} setIndex={this.setChordIndex} />
+                <Timeline 
+                    ref={this.timelineElement} 
+                    currentName={this.props.currentName} 
+                    progression={this.props.progression} 
+                    chordSelected={this.toggleTimelineSelection} 
+                    setIndex={this.setChordIndex} />
+
                 <Library 
                     setProgName={this.props.setProgName} 
                     signedIn={this.props.signedIn} 

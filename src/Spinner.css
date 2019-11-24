@@ -1,0 +1,14 @@
+.music_note, .note_container {
+    color: black;
+    width: 30px;
+    animation: animation-5bz3sx 4s ease-in-out infinite;
+}
+
+@keyframes animation-5bz3sx {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
