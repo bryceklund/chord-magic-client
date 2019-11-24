@@ -193,6 +193,11 @@ class SavedProgressions extends Component {
             error: ''
         }
     }
+
+    handleLoad = () => {
+      this.stopPlayback()
+      this.props.loadProgression(this.state.progressions.find(prog => prog.id === this.state.selected))
+    }
     
     stopPlayback = () => {
         for (let i = 0; i < this.state.playback.length; i++) {
@@ -286,7 +291,9 @@ class SavedProgressions extends Component {
       }
 
       fetch(progsUrl, options)
-        .then(result => result.json())
+        .then(result => {
+          return result.json()
+        })
         .then(data => this.setProgList(data))
         .then(data => {
           this.state.progressions.forEach((p, i) => {
@@ -300,7 +307,7 @@ class SavedProgressions extends Component {
     render() {
         const progs = this.state.progressions.length 
                         ? this.state.progressions.map((p, i) => {
-                            return <li className='progression'><button className='prog_button' id={p.id} onClick={(e) => {this.select(p, e.target)}}>{p.name}</button></li>
+                            return <li className='progression' key={i} ><button className='prog_button' id={p.id} onClick={(e) => {this.select(p, e.target)}}>{p.name}</button></li>
                         })
                         : <p className='no_progs'>Save a chord progression to access it here!</p>
 
@@ -312,7 +319,7 @@ class SavedProgressions extends Component {
                             <div className='saved_settings'>
                                 <button onClick={() => {this.startPlayback()}} className={`play_progression ${this.state.progressions.length ? '' : 'hidden'}`}>play</button>
                                 <button className={this.state.progressions.length ? '' : 'hidden'} onClick={() => {this.stopPlayback()}} className={`stop_progression ${this.state.progressions.length ? '' : 'hidden'}`}>stop</button>
-                                <Link className={`${!this.state.selected ? 'hidden' : ''}`} to='/editor'><button onClick={() => {this.props.loadProgression(this.state.progressions.find(prog => prog.id === this.state.selected))}} className='load_progression'>load</button></Link>
+                                <Link className={`${!this.state.selected ? 'hidden' : ''}`} to='/editor'><button onClick={() => {this.handleLoad()}} className='load_progression'>load</button></Link>
                                 <button onClick={() => {this.deleteProgression()}} className={`delete_progression ${!this.state.selected ? 'hidden' : ''}`}>delete</button>
                                 <Link to='/editor' className='back_progression'><button>back to editor</button></Link>
                             </div>

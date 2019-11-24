@@ -43,8 +43,10 @@ class App extends Component {
   }
 
   signIn = (username, password, e) => {
-    e.preventDefault()
-    this.loginElement.current.hideError()
+    if (e) {
+      e.preventDefault()
+      this.loginElement.current.hideError()
+    }
     const url = `${API_BASE_URL}/login`
     const options = {
       method: 'POST',
@@ -85,7 +87,7 @@ class App extends Component {
   }
 
   loadProgression = (progression) => {
-    this.setState({
+      this.setState({
       selected: progression.chords,
       progId: progression.id,
       progName: progression.name

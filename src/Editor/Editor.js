@@ -121,7 +121,7 @@ class Editor extends Component {
         const options = {
           method: 'PATCH',
           headers: new Headers({
-            'Authorization': `Bearer ${API_TOKEN}`,
+            'Authorization': `Bearer ${API_TOKEN} ${TokenService.getAuthToken()}`,
             'Content-Type': 'application/json'
           }),
           body: JSON.stringify({

@@ -63,7 +63,6 @@ class Register extends Component {
             })
         }
         fetch(url, options)
-            .then(res => res.json())
             .then(res => {
                 if (!res.ok) {
                     this.setState({
@@ -73,11 +72,12 @@ class Register extends Component {
                     this.props.signIn(username, password)
                 }
             })
+            .catch(error => console.log('error: ', error))
     }
 
     render() {
         return (
-            <body>
+            <React.Fragment>
                 <Nav />
                 <section className='login'>
                     <form className='login_form' onSubmit={(e) => this.postUser(e)} >
@@ -94,7 +94,7 @@ class Register extends Component {
                         </fieldset>
                     </form>
                 </section>
-            </body>
+            </React.Fragment>
         );
     }
 }
