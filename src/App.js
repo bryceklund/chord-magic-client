@@ -106,6 +106,16 @@ class App extends Component {
   
   componentDidMount() {
     unmute(this.state.context)
+    webAudioTouchUnlock(this.state.context)
+      .then(function (unlocked) {
+          if(unlocked) {
+              // AudioContext was unlocked from an explicit user action, sound should start playing now
+          } else {
+              // There was no need for unlocking, devices other than iOS
+          }
+      }, function(reason) {
+          console.error(reason);
+      });
   }
 
   render() {
