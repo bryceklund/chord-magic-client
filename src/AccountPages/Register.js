@@ -66,9 +66,12 @@ class Register extends Component {
         fetch(url, options)
             .then(res => {
                 if (!res.ok) {
-                    this.setState({
-                        error: res.error
-                    })
+                    res.json()
+                        .then(res => {
+                            return this.setState({
+                                error: res.error
+                            })
+                        })
                 } else {
                     this.props.signIn(username, password)
                 }
