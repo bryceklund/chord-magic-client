@@ -105,7 +105,7 @@ class App extends Component {
   }
   
   componentDidMount() {
-    unmute(this.state.context)
+    //unmute(this.state.context)
     webAudioTouchUnlock(this.state.context)
       .then(function (unlocked) {
           if(unlocked) {
