@@ -218,7 +218,7 @@ class SavedProgressions extends Component {
         while (counter < progression.length) {
             progression.forEach((chord, i) => {
             playback[i] = setTimeout(function() {
-                Synth(chord.voice, chord.oct, 2, .1, chord.scale, chord.name)}, i * (2 * 1000))
+                Synth(chord.voice, chord.oct, 2, .1, chord.scale, chord.name, this.props.context)}, i * (2 * 1000))
                 counter++
             })
         }

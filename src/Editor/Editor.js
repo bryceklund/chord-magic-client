@@ -147,7 +147,8 @@ class Editor extends Component {
                     currentName={this.props.currentName} 
                     progression={this.props.progression} 
                     chordSelected={this.toggleTimelineSelection} 
-                    setIndex={this.setChordIndex} />
+                    setIndex={this.setChordIndex}
+                    context={this.props.context} />
 
                 <Library 
                     setProgName={this.props.setProgName} 
@@ -160,7 +161,8 @@ class Editor extends Component {
                     insertChord={this.insertChord} 
                     chordSelected={this.toggleLibrarySelection} 
                     storeChord={this.updateSelectedChord} 
-                    resetSelection={this.clearSelectedChord} />
+                    resetSelection={this.clearSelectedChord}
+                    context={this.props.context} />
             </React.Fragment>
         );
     }

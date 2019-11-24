@@ -231,7 +231,7 @@ class Timeline extends Component {
             updateComponent()
             try {
               hideError()
-              Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name)
+              Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name, this.props.context)
             } catch(error) {
               stopPlayback()
               showError(error)

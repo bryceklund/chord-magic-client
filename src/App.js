@@ -9,10 +9,12 @@ import SavedProgressions from './SavedProgressions/SavedProgressions.js'
 import Editor from './Editor/Editor.js'
 import Nav from './Nav/Nav'
 import Spinner from './Spinner'
+import unmute from './Editor/unmute'
 import { API_BASE_URL, API_TOKEN } from './config'
 import TokenService from './services/tokenService'
 import AudioStore from './Editor/AudioStore'
 import './App.css'
+import webAudioTouchUnlock from 'web-audio-touch-unlock'
 
 class App extends Component {
 
@@ -27,6 +29,7 @@ class App extends Component {
       progId: null,
       progName: null,
       token: null,
+      context: new (window.AudioContext || window.webkitAudioContext)()
     }
   }
 
@@ -101,7 +104,9 @@ class App extends Component {
     })
   }
   
-  
+  componentDidMount() {
+    unmute(this.state.context)
+  }
 
   render() {
     return (
@@ -118,11 +123,13 @@ class App extends Component {
                                                               currentId={this.state.progId} 
                                                               currentName={this.state.progName} 
                                                               signedIn={TokenService.hasAuthToken()} 
-                                                              setCurrentProg={this.setCurrentProg} />} />
+                                                              setCurrentProg={this.setCurrentProg}
+                                                              context={this.state.context} />} />
                 <Route path='/saved' render={(props) => <SavedProgressions {...props} 
                                                               loadingTrue={this.startLoading}
                                                               loadingFalse={this.stopLoading}
-                                                              loadProgression={this.loadProgression}  />} />   
+                                                              loadProgression={this.loadProgression}
+                                                              context={this.state.context} />} />   
               </React.Fragment>
           </Switch>
     );

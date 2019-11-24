@@ -1,11 +1,14 @@
 import unmute from './unmute'
+import webAudioTouchUnlock from 'web-audio-touch-unlock'
 
 const AudioStore = require('./AudioStore.js')
 const AudioUnlock = require('web-audio-touch-unlock')
 
-function Synth(voice, oct, dur, vol, scale, chordName) {
+const context = new (window.AudioContext || window.webkitAudioContext)()
+webAudioTouchUnlock(context)
+
+function Synth(voice, oct, dur, vol, scale, chordName, context) {
     //create instance of the API
-    const context = new (window.AudioContext || window.webkitAudioContext)()
 
     //notes in this octave
     const notes = AudioStore.notes[oct]

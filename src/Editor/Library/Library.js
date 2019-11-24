@@ -82,7 +82,7 @@ class Library extends Component {
 
     highlightSelection = (selection, chord) => {
       if (this.state.prehear) {
-        Synth(this.state.voice, this.state.octave, 1, 0.1, this.state.scale, chord)
+        Synth(this.state.voice, this.state.octave, 1, 0.1, this.state.scale, chord, this.props.context)
       }
       const ul = document.getElementsByClassName('chords')[0].children
       Object.keys(ul).forEach(key => {
