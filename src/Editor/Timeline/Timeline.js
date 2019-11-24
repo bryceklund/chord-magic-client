@@ -78,7 +78,8 @@ class Timeline extends Component {
         bpm: 160,
         displayVolume: 25,
         loop: false,
-        error: false
+        error: false,
+        errorMessage: ''
       }
     }
 
@@ -194,9 +195,11 @@ class Timeline extends Component {
       this.play()
     }
 
-    showError = () => {
+    showError = (error) => {
+      console.log(error)
       this.setState({
-        error: true
+        error: true,
+        errorMessage: error
       })
       setTimeout(() => {
         this.hideError()
@@ -231,7 +234,7 @@ class Timeline extends Component {
               Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name)
             } catch(error) {
               stopPlayback()
-              showError()
+              showError(error)
             }}, i * (duration * 1000))
             counter++
         })
