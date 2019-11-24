@@ -29,7 +29,8 @@ class Register extends Component {
             })
         } else {
             this.setState({
-                error: null
+                error: null,
+                password
             })
         }
     }
