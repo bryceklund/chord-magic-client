@@ -6,8 +6,6 @@ function Synth(voice, oct, dur, vol, scale, chordName) {
     //create instance of the API
     const context = new (window.AudioContext || window.webkitAudioContext)()
 
-    unmute(context)
-
     //notes in this octave
     const notes = AudioStore.notes[oct]
 
@@ -51,6 +49,8 @@ function Synth(voice, oct, dur, vol, scale, chordName) {
     volume.gain.setValueAtTime(0, startTime)
     volume.gain.linearRampToValueAtTime(vol, startTime + (dur / 10))
     volume.gain.exponentialRampToValueAtTime(0.01, startTime + dur)
+
+    unmute(context)
 
     //start and stop playback
     synth.map(osc => {
