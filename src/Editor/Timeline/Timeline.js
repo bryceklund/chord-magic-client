@@ -222,6 +222,7 @@ class Timeline extends Component {
       const showError = this.showError.bind()
       const hideError = this.hideError.bind()
       const stopPlayback = this.stopPlayback.bind()
+      const context = this.props.context
       let counter = 0
       let playback = []
       while (counter < this.state.activeChords.length) {
@@ -231,7 +232,7 @@ class Timeline extends Component {
             updateComponent()
             try {
               hideError()
-              Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name, this.props.context)
+              Synth(chord.voice, chord.oct, duration, volume, chord.scale, chord.name, context)
             } catch(error) {
               stopPlayback()
               showError(error)
