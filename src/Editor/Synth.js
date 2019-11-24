@@ -1,5 +1,6 @@
-const AudioStore = require('./AudioStore.js')
 import unmute from './unmute'
+
+const AudioStore = require('./AudioStore.js')
 const AudioUnlock = require('web-audio-touch-unlock')
 
 function Synth(voice, oct, dur, vol, scale, chordName) {
