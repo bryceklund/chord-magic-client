@@ -1,11 +1,97 @@
-nav {
-    width: 100%;
-    height: 35px;
-    position: absolute;
-    top: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: darkgray;
+h1:hover {
+  animation: animation-hero 1s linear infinite;
+  background-size: 800% 800%;
+  background-image: repeating-linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.logout {
+  background: none;
+  font-size: 15px;
+  padding: 2px;
+  border: none;
+  color: darkred;
+}
+
+.logout:hover {
+  color: red;
+}
+
+.logout:active {
+  color: black;
+}
+
+.login_link {
+  font-style: none;
+}
+
+.login_link:hover {
+  color: white;
+}
+
+.login_link:active {
+  color: gray;
+}
+
+.logo {
+  width: 40px;
+}
+
+.logo_container {
+  position: absolute;
+}
+
+.logo:hover {
+  animation: animation-logo .5s ease-out 1;
+  filter: opacity(70%)
+}
+
+.logo:active {
+  filter: opacity(200%)
+}
+
+@keyframes animation-hero {
+  0% {
+    background-position: right;
   }
+  100% {
+    background-position: left;
+  }
+}
+
+@keyframes animation-logo {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .loggedin_links {
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    text-align: right;
+  }
+
+  nav {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    justify-content: space-between !important;
+  }
+
+  .logo_container {
+    position: static;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .login_link {
+    font-size: 18px;
+  }
+}

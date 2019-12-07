@@ -11,16 +11,27 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 8px;
   }
-  
+
+  .play_stop_buttons > button {
+    background: none;
+    border: none;
+    width: 80px;
+  }
+
+  .play_stop_icon {
+    width: 45px;
+  }
+
   .chord_box {
-    border: 1px solid black;
     width: 125px;
     display: flex;
     flex-direction: column;
     position: relative;
     justify-content: space-between;
     align-items: center;
+    margin: 1px;
   }
   
   .chord_label {
@@ -28,23 +39,36 @@
     position: absolute;
     text-align: center;
     cursor: cell;
-    padding-top: 50px;
+    padding-top: 60px;
     height: 100%;
     width: 100%;
   }
   
   .delete_chord {
-    width: 100%;
-    height: 25px;
+    width: 80%;
+    height: 30px;
     z-index: 1;
+    background: none;
+    border: none;
+    margin-top: 3px;
   }
-
   
   .move_chord_buttons > button {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    background: none;
+    border: 1px solid black;
+    margin: 2px;
+  }
+
+  .move_chord_buttons > button:hover {
+    filter: hue-rotate(150deg);
+  }
+
+  .move_chord_buttons > button:active {
+    filter: invert(100%);
   }
 
   .scrubber_buttons {
@@ -53,11 +77,21 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .scrubber_buttons > button, .jump_buttons > button {
+    background: none;
+    border: none;
+  }
+
+  .scrubber_buttons > button:active, .jump_buttons > button:active {
+    filter: opacity(50%);
+  }
   
   .slide_container {
     text-align: center;
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
   }
   
 .jump_buttons {
@@ -66,20 +100,25 @@
   justify-content: space-between;
 }
 
-.highlighted {
-  background-color: black;
+.plus {
   color: white;
+}
+
+.highlighted {
+  filter: invert(95%);
+  color: white;
+  background: black;
   top: 0px !important;
-  padding-top: 25px;
+  padding-top: 45px;
   height: 100%;
   width: 100%;
 }
 
 .highlighted_plus {
+  filter: invert(95%);
   background-color: black;
   color: white;
   top: 0px !important;
-  padding-top: 50px;
   height: 100%;
   width: 100%;
 }
@@ -109,6 +148,109 @@
   margin-bottom: 10px;
 }
 
+/* scale colorization */
+.maj { 
+  filter: grayscale(0%);
+}
+
+.min {
+  filter: grayscale(10%);
+
+}
+
+.maj7 {
+  filter: grayscale(20%);
+
+}
+
+.min7 {
+  filter: grayscale(30%);
+
+}
+
+.dim {
+  filter: grayscale(40%);
+
+}
+
+.dom7 {
+  filter: grayscale(50%);
+
+}
+
+.sus2 {
+  filter: grayscale(60%);
+}
+
+.sus4 {
+  filter: grayscale(70%);
+}
+
+.aug {
+  filter: grayscale(80%);
+}
+
+.global {
+  color: black;
+  font-family: Arial, sans-serif !important;
+}
+
+.global_inactive {
+  filter: grayscale(80%);
+  color: white;
+  font-family: Arial, sans-serif !important;
+}
+
+/* chord colorization */
+
+.a {
+  background-color: #D41111;
+}
+
+.bb {
+  background-color: #FFCF5D;
+}
+
+.b {
+  background-color: #FF8A00;
+}
+
+.c {
+  background-color: #FFF600;
+}
+
+.db {
+  background-color: #96D782;
+}
+
+.d {
+  background-color: #46B523;
+}
+
+.eb {
+  background-color: #82D2D7;
+}
+
+.e {
+  background-color: #0CB4D2;
+}
+
+.f {
+  background-color: #7b62c4;
+}
+
+.gb {
+  background-color: #DA81E7;
+}
+
+.g {
+  background-color: #B80CD2;
+}
+
+.ab {
+  background-color: #FF8282;
+}
+
 @media screen and (max-width: 700px) {
   .volume {
     margin-bottom: 16px;
@@ -120,3 +262,16 @@
   }
 }
 
+@media screen and (min-width: 700px) {
+  .chord_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .info_label::after {
+    content: ' |';
+  }
+  .info_label::before {
+    content: '| ';
+  }
+}

@@ -82,17 +82,16 @@ class Register extends Component {
     render() {
         return (
             <React.Fragment>
-                <Nav />
                 <section className='login'>
                     <form className='login_form' onSubmit={(e) => this.postUser(e)} >
-                        <fieldset>
+                        <fieldset className='register'>
                         <legend><h3>Register</h3></legend>
                         <label htmlFor='username'>Desired Username:</label>
-                        <input onChange={e => this.setUsername(e.target.value)} type='text' id='username' />
+                        <input className='username' onChange={e => this.setUsername(e.target.value)} type='text' id='username' />
                         <label htmlFor='password'>Password:</label>
-                        <input onChange={(e) => this.validateFirstPass(e.target.value)} type='password' id='password_one' />
+                        <input className='password' onChange={(e) => this.validateFirstPass(e.target.value)} type='password' id='password_one' />
                         <label htmlFor='password'>Repeat Password:</label>
-                        <input onChange={(e) => this.validateSecondPass(e.target.value)} type='password' id='password' />
+                        <input className='password' onChange={(e) => this.validateSecondPass(e.target.value)} type='password' id='password' />
                         <p className={`error ${this.state.error ? '' : 'hidden'}`}>{this.state.error}</p>
                         <button disabled={this.state.error} type="submit">Submit</button>
                         </fieldset>

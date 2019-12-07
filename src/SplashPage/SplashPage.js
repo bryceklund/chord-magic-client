@@ -8,10 +8,10 @@ class SplashPage extends Component {
             <main role='main'>
                 <header role='banner' className='intro_header'>
                     <h1>Welcome to Chord Wizard!</h1>
-                    <h2>Chord progression building, streamlined.</h2>
+                    <h2 className='tagline'>Chord progression building streamlined</h2>
                 </header>
                 <section className="getting_started">
-                    Getting started instructions
+                    [getting started instructions]
                 </section>
                 <section className="splash_login_links">
                     <Link to='/login' className='splash_login'>Login</Link>&nbsp;&nbsp;

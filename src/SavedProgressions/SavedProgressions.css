@@ -1,3 +1,6 @@
+.saved_container {
+    margin-top: 100px !important;
+}
 
 .progressions {
     width: 100%;
@@ -6,13 +9,14 @@
 .progression {
     width: 100%;
     height: 40px;
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid black;
 }
 
 .progression button {
     width: 100%;
     height: 100%;
     font-size: 20px;
+    background: none;
 }
 
 .saved_settings {
@@ -21,25 +25,38 @@
     justify-content: space-around;
     align-items: center;
     width: 25%;
+    background-color: lightcoral;
+    border-top-right-radius: 15px;
+    border-bottom: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
 }
 
-.library_settings {
-    display: flex;
-    flex-direction: row-reverse;
-    width: 700px;
-    height: 300px;
-    background: gray;
-    border: solid black 1px;
+.saved_settings button {
+    background: none;
+    width: 90px;
+    font-size: 12px;
+    border: 1px solid black;
+    padding: 5px;
 }
+
   
 .saved_library {
     width: 75%;
-    background: lightgray;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     overflow: auto;
+}
+
+.highlighted_prog {
+    color: white;
+    background: black !important;
+    top: 0px !important;
+    height: 100%;
+    width: 100%;
 }
 
 .library_container {
@@ -67,10 +84,31 @@
         height: 15%;
         width: 100%;
         flex-direction: row;
-        border-bottom: 5px solid black;
-      }
+        border-top-left-radius: 15px;
+    }
 
       .saved_library {
           width: 100%;
       }
+
+      .no_progs {
+          text-align: center;
+          margin-top: 50px;
+      }
+}
+
+@media screen and (min-width: 700px) {
+    .saved_settings {
+        border-bottom-right-radius: 15px;
+    }
+
+    .saved_library {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+
+    .no_progs {
+        text-align: center;
+        margin-top: 125px;
+    }
 }

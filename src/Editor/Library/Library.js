@@ -227,29 +227,29 @@ class Library extends Component {
               <div className='library'>
                   <button className={`back ${!this.state.toggleHidden ? 'hidden' : ''}`} onClick={() => this.toggleHidden('back')}>&lt; back to scales</button>
                 <ul className={`scales ${this.state.toggleHidden ? 'hidden' : ''}`}>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Maj7</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Min7</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Dim</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Dom7</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Sus2</li>
-                    <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Sus4</li>
-                  <li className='scale' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>
+                    <li className='scale maj' onClick={(e) => this.setScale(e.target.textContent)}>Maj</li>
+                    <li className='scale min' onClick={(e) => this.setScale(e.target.textContent)}>Min</li>
+                    <li className='scale maj7' onClick={(e) => this.setScale(e.target.textContent)}>Maj7</li>
+                    <li className='scale min7' onClick={(e) => this.setScale(e.target.textContent)}>Min7</li>
+                    <li className='scale dim' onClick={(e) => this.setScale(e.target.textContent)}>Dim</li>
+                    <li className='scale dom7' onClick={(e) => this.setScale(e.target.textContent)}>Dom7</li>
+                    <li className='scale sus2' onClick={(e) => this.setScale(e.target.textContent)}>Sus2</li>
+                    <li className='scale sus4' onClick={(e) => this.setScale(e.target.textContent)}>Sus4</li>
+                    <li className='scale aug' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>
                 </ul>
                 <ul className={`scales chords ${!this.state.toggleHidden ? 'hidden' : ''}`}>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>A</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Bb</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>B</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>C</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Db</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>D</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Eb</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>E</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>F</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Gb</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>G</li>
-                    <li className='scale' onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Ab</li>
+                    <li className={`note a ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>A</li>
+                    <li className={`note bb ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Bb</li>
+                    <li className={`note b ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>B</li>
+                    <li className={`note c ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>C</li>
+                    <li className={`note db ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Db</li>
+                    <li className={`note d ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>D</li>
+                    <li className={`note eb ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Eb</li>
+                    <li className={`note e ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>E</li>
+                    <li className={`note f ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>F</li>
+                    <li className={`note gb ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Gb</li>
+                    <li className={`note g ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>G</li>
+                    <li className={`note ab ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Ab</li>
                 </ul>
               </div>
       

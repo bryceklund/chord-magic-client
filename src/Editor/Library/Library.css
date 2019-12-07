@@ -60,14 +60,14 @@ body {
 
 nav {
   width: 100%;
-  height: 35px;
+  height: 45px;
   position: absolute;
   top: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  background-color: darkgray;
+  background-color: #27CCBE;
 }
 
 .timeline {
@@ -92,33 +92,18 @@ nav {
 
 .player_timeline {
   width: 500px;
-  height: 150px;
-  background-color: lightgrey;
+  height: 180px;
+  background-color: black;
   display: flex;
   flex-direction: row;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.chord_box {
-  border: 1px solid black;
-  width: 125px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .chord_label {
   font-size: 40px;
   position: absolute;
   text-align: center;
-}
-
-.delete_chord {
-  width: 100%;
-  height: 25px;
 }
 
 .move_chord_buttons {
@@ -159,8 +144,8 @@ nav {
   flex-direction: row-reverse;
   width: 700px;
   height: 300px;
-  background: gray;
-  border: solid black 1px;
+  background: #27CCBE;
+  border-radius: 15px;
 }
 
 .wave_icon {
@@ -202,12 +187,11 @@ nav {
 
 .library {
   width: 75%;
-  background: lightgray;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .scales {
@@ -221,13 +205,22 @@ nav {
   color: black;
 }
 
-.scale {
+.scale, .note {
   font-size: 50px;
   width: 150px;
-  border: 3px solid black;
   text-align: center;
   margin-bottom: 10px;
   cursor: copy;
+}
+
+.note {
+  padding-bottom: 5px;
+}
+
+.scale {
+  background: linear-gradient(to right, #90C1DE 0 8.33%, #F7591E 8.33% 16.66%, #2AB1A2 16.66% 25%, #FDF147 25% 33.32%, #A0E2CF 33.32% 41.65%, #ED87DD 41.65% 50%, #E26112 50% 58.31%, #72C7C0 58.31% 66.64%, #6FDFAB 66.64% 74.97%, #8793FF 74.97% 83.3%, #E0B076 83.3% 91.63%, #89C781 91.63% 100%);
+  height: 70px;
+  padding-top: 5px;
 }
 
 .settings {
@@ -236,6 +229,11 @@ nav {
   justify-content: space-around;
   align-items: center;
   width: 25%;
+  background-color: #3E807A;
+  border-top-right-radius: 15px;
+  border-bottom: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .oct_ins_pre {
@@ -267,9 +265,20 @@ nav {
   display: none;
 }
 
+.save_progression {
+  width: 90px;
+  border: 1px solid black;
+  background: none;
+  font-size: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
 .new_save_tooltip, .update_tooltip {
   position: absolute;
-  background-color: white;
+  background: white;
+  opacity: .8;
   border: 1px solid black;
   height: 100px;
   display: flex;
@@ -278,7 +287,18 @@ nav {
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
-  bottom: 300px;
+}
+
+.new_save_tooltip input, .update_tooltip input {
+  border: 1px solid black;
+  font-size: 15px;
+  padding-left: 3px;
+}
+
+.new_save_tooltip button, .update_tooltip button {
+  border: 1px solid black;
+  background: none;
+  padding: 3px;
 }
 
 .back {
@@ -304,6 +324,135 @@ nav {
   display: none;
 }
 
+.scale:hover, .note:hover {
+  opacity: 75%;
+}
+
+.insert_chord {
+  width: 70px;
+  padding: 5px;
+  background: none;
+  font-size: 18px;
+  border: 1px black solid;
+}
+
+.insert_chord:disabled {
+  border: none;
+}
+
+.insert_chord:hover:enabled {
+  animation: animation-insert 1s linear infinite;
+  background-size: 800% 800%;
+  background-image: repeating-linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.insert_chord:active:enabled {
+  color: black;
+}
+
+/* scale colorization */
+.maj { 
+  filter: grayscale(0%);
+}
+
+.min {
+  filter: grayscale(10%);
+
+}
+
+.maj7 {
+  filter: grayscale(20%);
+
+}
+
+.min7 {
+  filter: grayscale(30%);
+
+}
+
+.dim {
+  filter: grayscale(40%);
+
+}
+
+.dom7 {
+  filter: grayscale(50%);
+
+}
+
+.sus2 {
+  filter: grayscale(60%);
+}
+
+.sus4 {
+  filter: grayscale(70%);
+}
+
+.aug {
+  filter: grayscale(80%);
+}
+
+/* chord colorization */
+
+.a {
+  background-color: #D41111;
+}
+
+.bb {
+  background-color: #FFCF5D;
+}
+
+.b {
+  background-color: #FF8A00;
+}
+
+.c {
+  background-color: #FFF600;
+}
+
+.db {
+  background-color: #96D782;
+}
+
+.d {
+  background-color: #46B523;
+}
+
+.eb {
+  background-color: #82D2D7;
+}
+
+.e {
+  background-color: #0CB4D2;
+}
+
+.f {
+  background-color: #7b62c4;
+}
+
+.gb {
+  background-color: #DA81E7;
+}
+
+.g {
+  background-color: #B80CD2;
+}
+
+.ab {
+  background-color: #FF8282;
+}
+
+@keyframes animation-insert {
+  0% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
 
 @media screen and (max-width: 700px) {
 
@@ -329,17 +478,18 @@ nav {
   .library_settings {
     flex-direction: column;
     width: 325px;
-    height: 700px;
+    height: 800px;
   }
 
   .settings {
     height: 25%;
     width: 100%;
     flex-direction: row;
+    border-top-left-radius: 15px;
   }
 
   .library {
-    height: 75%;
+    margin-top: 30px;
     width: 100%;
   }
 
@@ -358,14 +508,24 @@ nav {
     bottom: initial;
   }
 
-  .scale {
-    font-size: 30px;
+  .scale, .note {
     width: 130px;
     margin-bottom: 40px;
   }
 
+  .note {
+    font-size: 40px;
+  }
+
+  .scale {
+    display: inline-block;
+    font-size: 50px;
+  }
+
   .scales {
     columns: 2;
+    padding-left: 14px;
+    padding-top: 40px;
   }
 
   .login_message {
@@ -385,10 +545,23 @@ nav {
     margin-right: auto;
   }
 
+  .insert_chord:disabled {
+    color: lightgray;
+    border: 1px solid lightgray;
+  }
+
+  .insert_chord:enabled {
+    color: black;
+  }
+
   .save_progression {
     margin-left: auto;
     margin-right: auto;
-    width: 60px;
   }
 }
 
+@media screen and (min-width: 700px) {
+  .settings {
+    border-bottom-right-radius: 15px;
+  }
+}

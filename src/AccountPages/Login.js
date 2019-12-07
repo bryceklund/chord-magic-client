@@ -45,9 +45,9 @@ class Login extends Component {
                         <fieldset>
                         <legend><h3>Login</h3></legend>
                         <label htmlFor='username'>Username:</label>
-                        <input type='text' id='username' onChange={(e) => this.setUser(e.target.value)} />
+                        <input className='username' type='text' id='username' onChange={(e) => this.setUser(e.target.value)} />
                         <label htmlFor='password'>Password:</label>
-                        <input type='password' id='password' onChange={(e) => this.setPass(e.target.value)} />
+                        <input className='password' type='password' id='password' onChange={(e) => this.setPass(e.target.value)} />
                         <button type="submit" disabled={!(this.state.username && this.state.password)}>Submit</button>
                         </fieldset>
                     </form>

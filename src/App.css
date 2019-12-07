@@ -25,6 +25,7 @@ footer, header, hgroup, menu, section {
 
 body {
 	line-height: 1;
+	background: #7DFFF4;
 }
 
 ol, ul {
@@ -47,7 +48,7 @@ table {
 }
 
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Alata', sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -64,3 +65,15 @@ body {
 	color: black;
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:visited {
+	color: inherit
+}
+
+h1 {
+	font-size: 18px;
+}

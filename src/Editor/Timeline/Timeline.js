@@ -113,13 +113,15 @@ class Timeline extends Component {
 
     setGlobalView = () => {
       let totalChords = [] 
-      this.state.activeChords.forEach((chord, i) => totalChords[i] = {active: false})
+      this.state.activeChords.forEach((chord, i) => totalChords[i] = {active: false, scale: chord.scale, name: chord.name})
       for (let i = this.state.init; i < this.state.end; i++) {
         if (totalChords[i]) {
           totalChords[i].active = true
         }
       }
-      let indicator = totalChords.map(chord => chord.active ? '+' : '-').join('')
+      console.log(totalChords)
+      let indicator = totalChords.map(chord => chord.active ? <span className={`global ${chord.scale} ${chord.name.toLowerCase()}`}>_</span> : <span className={`global_inactive ${chord.name.toLowerCase()}`}>_</span>)
+      console.log(indicator)
       this.setState({
         globalView: indicator
       })
@@ -365,16 +367,16 @@ class Timeline extends Component {
               <div className={`${this.state.error ? 'playback_error' : 'hidden'}`}><Spinner active={this.state.error} />
               Oops, try again in a few seconds...</div> 
             <div className='play_stop_buttons'>
-              <button onClick={() => this.startPlayback()}><img src='' alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
-              <button onClick={() => this.stopPlayback()}><img src='' alt='stop button' /></button>
+              <button onClick={() => this.startPlayback()}><img className='play_stop_icon' src={require('../../icons/play-button.png')} alt='play button' /></button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button onClick={() => this.stopPlayback()}><img className='play_stop_icon' src={require('../../icons/stop-button.png')} alt='stop button' /></button>
               {/*<button onClick={() => this.toggleLoop()}>Loop {this.state.loop ? 'on' : 'off'}</button>*/}
             </div>
             <div className='global_view'>{this.state.globalView}</div>
             <div className='player_timeline'>
 
-            <div className={`chord_box one`}>
+            <div className={`chord_box one ${this.state.timelineChords[0] ? this.state.timelineChords[0].scale + ' ' + this.state.timelineChords[0].name.toLowerCase() : ''}`}>
                 {this.state.timelineChords[0]
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[0].id)}>X</button> 
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[0].id)}><img src={require('../../icons/delete-button.png')} alt='delete chord' /></button> 
                   : null}
                 <span onClick={(e) => this.state.timelineChords[0] ? this.toggleActiveChord(this.state.timelineChords[0].id) : this.highlightPlus(e.target)}
                     className={`chord_label ${this.state.timelineChords[0] && this.state.timelineChords[0].active 
@@ -382,9 +384,9 @@ class Timeline extends Component {
                                               : ''}`}>
                   {this.state.timelineChords[0]
                     ? this.state.timelineChords[0].name
-                    : '+'}
+                    : <span className='plus'>+</span>}
                   {this.state.timelineChords[0]
-                    ? <section className={`${this.state.timelineChords[0] && this.state.timelineChords[0].active 
+                    ? <section className={`chord_info ${this.state.timelineChords[0] && this.state.timelineChords[0].active 
                                   ? '' 
                                   : 'hidden'}`}>
                         <div className='info_label'>{this.state.timelineChords[0].scale}</div>
@@ -396,18 +398,18 @@ class Timeline extends Component {
                 {this.state.timelineChords[0]
                   ? (<div className='move_chord_buttons'>
                     {this.state.init > 0 
-                      ? <button className='move_chord_left' onClick={() => this.swapChords(this.state.init, this.state.init - 1)}><img src='' alt='move left' /></button>
+                      ? <button className='move_chord_left' onClick={() => this.swapChords(this.state.init, this.state.init - 1)}><img src={require('../../icons/move-left-arrow.png')} alt='move left' /></button>
                       : null}
                     {this.state.timelineChords[1]
-                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init, this.state.init + 1)}><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init, this.state.init + 1)}><img src={require('../../icons/move-right-arrow.png')} alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
             </div>
 
-            <div className={`chord_box two`}>
+            <div className={`chord_box two ${this.state.timelineChords[1] ? this.state.timelineChords[1].scale + ' ' + this.state.timelineChords[1].name.toLowerCase() : ''}`}>
                 {this.state.timelineChords[1] 
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[1].id)}>X</button> 
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[1].id)}><img src={require('../../icons/delete-button.png')} alt='delete chord' /></button> 
                   : null}
                 <span onClick={(e) => this.state.timelineChords[1] ? this.toggleActiveChord(this.state.timelineChords[1].id) : this.highlightPlus(e.target)} 
                   className={`chord_label ${this.state.timelineChords[1] && this.state.timelineChords[1].active  
@@ -416,10 +418,10 @@ class Timeline extends Component {
                   {this.state.timelineChords[1]
                     ? this.state.timelineChords[1].name
                     : this.state.timelineChords[0]
-                    ? '+'
+                    ? <span className='plus'>+</span>
                     : null}
                   {this.state.timelineChords[1]
-                    ? <section className={`${this.state.timelineChords[1] && this.state.timelineChords[1].active 
+                    ? <section className={`chord_info ${this.state.timelineChords[1] && this.state.timelineChords[1].active 
                                             ? '' 
                                             : 'hidden'}`}>
                         <div className='info_label'>{this.state.timelineChords[1].scale}</div>
@@ -430,17 +432,17 @@ class Timeline extends Component {
                 </span>
                 {this.state.timelineChords[1]
                   ? (<div className='move_chord_buttons'>
-                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 1, this.state.init)}><img src='' alt='move left' /></button>
+                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 1, this.state.init)}><img src={require('../../icons/move-left-arrow.png')} alt='move left' /></button>
                     {this.state.timelineChords[2]
-                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 1, this.state.init + 2)}><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 1, this.state.init + 2)}><img src={require('../../icons/move-right-arrow.png')} alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
             </div>
 
-            <div className='chord_box three'>
+            <div className={`chord_box three ${this.state.timelineChords[2] ? this.state.timelineChords[2].scale + ' ' + this.state.timelineChords[2].name.toLowerCase() : ''}`}>
                 {this.state.timelineChords[2] 
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[2].id)}>X</button> 
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[2].id)}><img src={require('../../icons/delete-button.png')} alt='delete chord' /></button> 
                   : null}
                 <span onClick={(e) => this.state.timelineChords[2] ? this.toggleActiveChord(this.state.timelineChords[2].id) : this.highlightPlus(e.target)}
                   className={`chord_label ${this.state.timelineChords[2] && this.state.timelineChords[2].active 
@@ -449,10 +451,10 @@ class Timeline extends Component {
                   {this.state.timelineChords[2] 
                     ? this.state.timelineChords[2].name
                     : this.state.timelineChords[1] 
-                    ? '+' 
+                    ? <span className='plus'>+</span>
                     : null}
                   {this.state.timelineChords[2]
-                    ? <section className={`${this.state.timelineChords[2] && this.state.timelineChords[2].active 
+                    ? <section className={`chord_info ${this.state.timelineChords[2] && this.state.timelineChords[2].active 
                                             ? '' 
                                             : 'hidden'}`}>
                         <div className='info_label'>{this.state.timelineChords[2].scale}</div>
@@ -463,17 +465,17 @@ class Timeline extends Component {
                 </span>
                 {this.state.timelineChords[2]
                   ? (<div className='move_chord_buttons'>
-                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 2, this.state.init + 1)}><img src='' alt='move left' /></button>
+                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 2, this.state.init + 1)}><img src={require('../../icons/move-left-arrow.png')} alt='move left' /></button>
                     {this.state.timelineChords[3]
-                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 2, this.state.init + 3)}><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 2, this.state.init + 3)}><img src={require('../../icons/move-right-arrow.png')} alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
               </div>
 
-              <div className='chord_box four'>
+              <div className={`chord_box four ${this.state.timelineChords[3] ? this.state.timelineChords[3].scale + ' ' + this.state.timelineChords[3].name.toLowerCase() : ''}`}>
                 {this.state.timelineChords[3] 
-                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[3].id)}>X</button> 
+                  ? <button className='delete_chord' onClick={() => this.removeChord(this.state.timelineChords[3].id)}><img src={require('../../icons/delete-button.png')} alt='delete chord' /></button> 
                   : null}
                 <span onClick={(e) => this.state.timelineChords[3] ? this.toggleActiveChord(this.state.timelineChords[3].id) : this.highlightPlus(e.target)} 
                   className={`chord_label ${this.state.timelineChords[3] && this.state.timelineChords[3].active
@@ -482,10 +484,10 @@ class Timeline extends Component {
                   {this.state.timelineChords[3] 
                     ? this.state.timelineChords[3].name
                     : this.state.timelineChords[2] 
-                    ? '+' 
+                    ? <span className='plus'>+</span> 
                     : null}
                     {this.state.timelineChords[3] 
-                      ? <section className={`${this.state.timelineChords[3] && this.state.timelineChords[3].active 
+                      ? <section className={`chord_info ${this.state.timelineChords[3] && this.state.timelineChords[3].active 
                                           ? '' 
                                           : 'hidden'}`}>
                           <div className='info_label'>{this.state.timelineChords[3].scale}</div>
@@ -496,9 +498,9 @@ class Timeline extends Component {
                 </span>
                 {this.state.timelineChords[3]
                   ? (<div className='move_chord_buttons'>
-                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 3, this.state.init + 2)}><img src='' alt='move left' /></button>
+                      <button className='move_chord_left' onClick={() => this.swapChords(this.state.init + 3, this.state.init + 2)}><img src={require('../../icons/move-left-arrow.png')} alt='move left' /></button>
                     {this.state.activeChords[this.state.end]
-                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 3, this.state.init + 4)}><img src='' alt='move right' /></button>
+                      ? <button className='move_chord_right' onClick={() => this.swapChords(this.state.init + 3, this.state.init + 4)}><img src={require('../../icons/move-right-arrow.png')} alt='move right' /></button>
                       : null}
                     </div>)
                 : null}
@@ -506,7 +508,7 @@ class Timeline extends Component {
             </div>
 
             <div className='scrubber_buttons'>
-              <button onClick={() => this.decrementTimeline()}><img src='' alt='scrub left' /></button>
+              <button onClick={() => this.decrementTimeline()}><img src={require('../../icons/scrub-left-arrow.png')} alt='scrub left' /></button>
               <div className="slide_container">
                 <label className='volume' htmlFor='volume'>Volume: {this.state.displayVolume}%</label>
                 <input type="range" min="0" max="100" defaultValue="25" className="volume_slider" id="volume" 
@@ -517,11 +519,11 @@ class Timeline extends Component {
                 <input type="range" min="1" max="100" defaultValue="30" className="speed_slider" id="speed"
                   onChange={(e) => this.setSpeed(e.target.value)} />
               </div>
-              <button onClick={() => this.incrementTimeline()}><img src='' alt='scrub right' /></button>
+              <button onClick={() => this.incrementTimeline()}><img src={require('../../icons/scrub-right-arrow.png')} alt='scrub right' /></button>
             </div>
             <div className='jump_buttons'>
-              <button onClick={() => this.jumpToStart()}>jump to beginning</button>
-              <button onClick={() => this.jumpToEnd()}>jump to end</button>
+              <button onClick={() => this.jumpToStart()}><img src={require('../../icons/jump-left-arrow.png')} alt='jump to beginning'/></button>
+              <button onClick={() => this.jumpToEnd()}><img src={require('../../icons/jump-right-arrow.png')} alt='jump to end' /></button>
             </div>
           </section>
         );

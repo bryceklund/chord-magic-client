@@ -6,181 +6,191 @@ import { API_BASE_URL, API_TOKEN } from '../config'
 import TokenService from '../services/tokenService'
 import './SavedProgressions.css';
 
-/*progressions: {
-  'Nice one': [
-      {
-        id: 0,
-        name: 'B',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 1,
-        name: 'G',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 2,
-        name: 'A',
-        scale: 'min',
-        oct: 'minusTwo',
-        voice: 'sawtooth',
-        active: false
-      }, 
-      {
-        id: 3,
-        name: 'D',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'square',
-        active: false
-      }, 
-      {
-        id: 4,
-        name: 'G',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 5,
-        name: 'B',
-        scale: 'min',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 6,
-        name: 'C',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'square',
-        active: false
-      }
-    ],
-  'Minor one': [
-      {
-        id: 0,
-        name: 'G',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 1,
-        name: 'B',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 2,
-        name: 'E',
-        scale: 'min',
-        oct: 'minusTwo',
-        voice: 'sawtooth',
-        active: false
-      }, 
-      {
-        id: 3,
-        name: 'C',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'square',
-        active: false
-      }, 
-      {
-        id: 4,
-        name: 'G',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 5,
-        name: 'B',
-        scale: 'min',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 6,
-        name: 'C',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'square',
-        active: false
-      }
-    ],
-  'Metal one': [
-      {
-        id: 0,
-        name: 'G',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 1,
-        name: 'B',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 2,
-        name: 'E',
-        scale: 'min',
-        oct: 'minusTwo',
-        voice: 'sawtooth',
-        active: false
-      }, 
-      {
-        id: 3,
-        name: 'C',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'square',
-        active: false
-      }, 
-      {
-        id: 4,
-        name: 'G',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 5,
-        name: 'B',
-        scale: 'min',
-        oct: 'minusTwo',
-        voice: 'triangle',
-        active: false
-      }, 
-      {
-        id: 6,
-        name: 'C',
-        scale: 'maj',
-        oct: 'minusTwo',
-        voice: 'square',
-        active: false
-      }
-    ],*/
+/*
+              {
+                id: 1,
+                name: 'Nice one',
+                chords: [
+                  {
+                    id: 0,
+                    name: 'B',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 1,
+                    name: 'G',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 2,
+                    name: 'A',
+                    scale: 'min',
+                    oct: 'minusTwo',
+                    voice: 'sawtooth',
+                    active: false
+                  }, 
+                  {
+                    id: 3,
+                    name: 'D',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'square',
+                    active: false
+                  }, 
+                  {
+                    id: 4,
+                    name: 'G',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 5,
+                    name: 'B',
+                    scale: 'min',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 6,
+                    name: 'C',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'square',
+                    active: false
+                  }
+                ]},
+              {
+                id: 3,
+                name: 'Minor one',
+                chords: [
+                  {
+                    id: 0,
+                    name: 'G',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 1,
+                    name: 'B',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 2,
+                    name: 'E',
+                    scale: 'min',
+                    oct: 'minusTwo',
+                    voice: 'sawtooth',
+                    active: false
+                  }, 
+                  {
+                    id: 3,
+                    name: 'C',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'square',
+                    active: false
+                  }, 
+                  {
+                    id: 4,
+                    name: 'G',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 5,
+                    name: 'B',
+                    scale: 'min',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 6,
+                    name: 'C',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'square',
+                    active: false
+                  }
+                ]},
+              {
+                id: 2,
+                name: 'Metal one',
+                chords: [
+                  {
+                    id: 0,
+                    name: 'G',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 1,
+                    name: 'B',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 2,
+                    name: 'E',
+                    scale: 'min',
+                    oct: 'minusTwo',
+                    voice: 'sawtooth',
+                    active: false
+                  }, 
+                  {
+                    id: 3,
+                    name: 'C',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'square',
+                    active: false
+                  }, 
+                  {
+                    id: 4,
+                    name: 'G',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 5,
+                    name: 'B',
+                    scale: 'min',
+                    oct: 'minusTwo',
+                    voice: 'triangle',
+                    active: false
+                  }, 
+                  {
+                    id: 6,
+                    name: 'C',
+                    scale: 'maj',
+                    oct: 'minusTwo',
+                    voice: 'square',
+                    active: false
+                  }
+                ]},
+            */
 
 class SavedProgressions extends Component {
     constructor(props) {
@@ -229,13 +239,13 @@ class SavedProgressions extends Component {
   
     unhighlightAll = () => {
         let progs = document.getElementsByClassName('prog_button')
-        Object.keys(progs).map(e => progs[e].classList.remove('highlighted'))
+        Object.keys(progs).map(e => progs[e].classList.remove('highlighted_prog'))
     }
 
     select = (progression, target) => {
         this.stopPlayback()
         this.unhighlightAll()
-        target.classList.toggle('highlighted')
+        target.classList.toggle('highlighted_prog')
         this.setState({
             selected: progression.id
         })
@@ -311,7 +321,7 @@ class SavedProgressions extends Component {
                         })
                         : <p className='no_progs'>Save a chord progression to access it here!</p>
 
-            return TokenService.hasAuthToken()
+            /*return TokenService.hasAuthToken()
               ?  (
                   <React.Fragment>
                     <section className='library_container'>
@@ -332,7 +342,25 @@ class SavedProgressions extends Component {
                     </section>
                   </React.Fragment>
                   )
-              : <div className='forbidden'>You must be signed in to view this page.</div>
+              : <div className='forbidden'>You must be signed in to view this page.</div>*/
+              return <React.Fragment>
+              <section className='library_container saved_container'>
+                  <div className='library_settings'>
+                      <div className='saved_settings'>
+                          <button onClick={() => {this.startPlayback()}} className={`play_progression ${this.state.progressions.length ? '' : 'hidden'}`}>play</button>
+                          <button className={this.state.progressions.length ? '' : 'hidden'} onClick={() => {this.stopPlayback()}} className={`stop_progression ${this.state.progressions.length ? '' : 'hidden'}`}>stop</button>
+                          <Link className={`${!this.state.selected ? 'hidden' : ''}`} to='/editor'><button onClick={() => {this.handleLoad()}} className='load_progression'>load</button></Link>
+                          <button onClick={() => {this.deleteProgression()}} className={`delete_progression ${!this.state.selected ? 'hidden' : ''}`}>delete</button>
+                          <Link to='/editor' className='back_progression'><button>back</button></Link>
+                      </div>
+                      <div className='saved_library'>
+                          <ul className='progressions'>
+                              {progs}
+                          </ul>
+                      </div>
+                  </div>
+              </section>
+            </React.Fragment>
               
     }
 }

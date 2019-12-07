@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import LoadingIcon from './eighth-note.png'
+import LoadingIcon from './loading-icon.png'
 import './Spinner.css'
 
 export class Spinner extends Component {
