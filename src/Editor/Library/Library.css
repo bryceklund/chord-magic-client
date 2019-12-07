@@ -325,7 +325,7 @@ nav {
 }
 
 .scale:hover, .note:hover {
-  opacity: 75%;
+  opacity: 0.75;
 }
 
 .insert_chord {
@@ -333,7 +333,7 @@ nav {
   padding: 5px;
   background: none;
   font-size: 18px;
-  border: 1px black solid;
+  border: none;
 }
 
 .insert_chord:disabled {

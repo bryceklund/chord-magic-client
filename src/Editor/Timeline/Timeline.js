@@ -119,9 +119,7 @@ class Timeline extends Component {
           totalChords[i].active = true
         }
       }
-      console.log(totalChords)
       let indicator = totalChords.map(chord => chord.active ? <span className={`global ${chord.scale} ${chord.name.toLowerCase()}`}>_</span> : <span className={`global_inactive ${chord.name.toLowerCase()}`}>_</span>)
-      console.log(indicator)
       this.setState({
         globalView: indicator
       })
