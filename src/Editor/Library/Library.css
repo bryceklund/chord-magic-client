@@ -546,7 +546,7 @@ nav {
 
   .insert_chord:disabled {
     color: lightgray;
-    border: 1px solid lightgray;
+    border: none;
   }
 
   .insert_chord:enabled {
