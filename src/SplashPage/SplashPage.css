@@ -9,6 +9,7 @@
   }
 
   .intro_header h1 {
+    height: 45px;
       font-size: 36px;
       animation: animation-hero 1s linear infinite;
       background-size: 800% 800%;
@@ -28,18 +29,20 @@
     color: darkturquoise;
   }
   
-  .splash_login:hover, .splash_register:hover, .splash_continue:hover {
+  .splash_login:hover, .splash_register:hover, .splash_continue:hover, .readme_link:hover {
     color: white;
   }
   
-  .splash_login:active, .splash_register:active, .splash_continue:active {
+  .splash_login:active, .splash_register:active, .splash_continue:active, .readme_link:active {
     color: gray;
   }
 
   .getting_started {
-    background-color: #30FFEE;
+    background-color: #27CCBE;
     text-align: center;
     padding-top: 35px;
+    padding: 35px;
+    line-height: 26px;
   }
 
   .bold {
@@ -49,15 +52,24 @@
   .instructions {
     margin-left: auto;
     margin-right: auto;
-    width: 700px;
+    max-width: 700px;
+    font-size: 18px;
   }
   
   .splash_login_links {
-    background-color: #3E807A;
+    background-color: #27CCBE;
     height: 150px;
     text-align: center;
     padding-top: 30px;
     line-height: 40px;
+  }
+
+  .readme_link {
+    color: indigo;
+  }
+
+  .splash_login_links a {
+    color: indigo;
   }
 
   .timeline_photo {
@@ -67,6 +79,7 @@
   @media screen and (max-width: 700px) {
     .intro_header h1 {
         font-size: 28px;
+        height: 75px;
     }
     .intro_header h2 {
         font-size: 15px;

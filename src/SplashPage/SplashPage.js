@@ -11,10 +11,8 @@ class SplashPage extends Component {
                     <h2 className='tagline'>Chord progression building streamlined</h2>
                 </header>
                 <section className="getting_started">
-                    <p className='instructions'>It's great to have you here. If you already know what you're doing, you can&nbsp;<a href='#'>jump to the bottom</a>&nbsp;to proceed.
-                    <br /><span className='tagline'> Chord Magic</span> is a tool to help you build and save chord progressions. It's made up of a <span className='bold'>timeline:</span><img className='timeline_photo' src={require('../introduction/timeline.png')} alt='timline' />and a <span className='bold'>library:</span> 
-                     You can move through the timline by using the arrows underneath to scub left/right, or jump to the beginning/end. 
-                     Select a chord to view its scale, instrument, and octave. Move </p>
+                    <p className='instructions'>It's great to have you here. If you already know what you're doing, you can use one of the buttons below to proceed.
+                    Otherwise, check out the <a className='readme_link' href='https://github.com/bryceklund/chord-magic-client/blob/master/README.md' target='_blank'>readme</a> to get started.</p>
                 </section>
                 <section className="splash_login_links">
                     <Link to='/login' className='splash_login'>Login</Link>&nbsp;&nbsp;
