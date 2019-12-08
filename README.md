@@ -72,7 +72,7 @@ Load a saved progression by selecting it from the Saved Progressions page and cl
 ![loading a progression](https://i.imgur.com/4BT6Oby.gif)
 
 
-## Technologies Used
+# Technologies Used
 Bootstrapped with create-react-app, frontend written in JavaScript ES6 with React 16.9
 
 Audio rendered via the Web Audio API
