@@ -19,16 +19,37 @@
   }
 
   .intro_header h2 {
-      font-size: 12px;
+      font-size: 18px;
       line-height: 30px;
+  }
+
+  .splash_login a, .splash_register a, .splash_continue a {
+    font-style: none;
+    color: darkturquoise;
+  }
+  
+  .splash_login:hover, .splash_register:hover, .splash_continue:hover {
+    color: white;
+  }
+  
+  .splash_login:active, .splash_register:active, .splash_continue:active {
+    color: gray;
   }
 
   .getting_started {
     background-color: #30FFEE;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    padding-top: 35px;
+  }
+
+  .bold {
+    font-size: 25px;
+  }
+
+  .instructions {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
   }
   
   .splash_login_links {
@@ -37,6 +58,10 @@
     text-align: center;
     padding-top: 30px;
     line-height: 40px;
+  }
+
+  .timeline_photo {
+    width: 200px;
   }
 
   @media screen and (max-width: 700px) {

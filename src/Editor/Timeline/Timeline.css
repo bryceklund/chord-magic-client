@@ -52,6 +52,14 @@
     border: none;
     margin-top: 3px;
   }
+
+  .delete_chord img {
+    width: 20px;
+  }
+
+  .delete_chord:active {
+    filter: invert(100%)
+  }
   
   .move_chord_buttons > button {
     display: flex;
@@ -63,12 +71,20 @@
     margin: 2px;
   }
 
+  .move_chord_buttons img {
+    width: 20px;
+  }
+
   .move_chord_buttons > button:hover {
     filter: hue-rotate(150deg);
   }
 
   .move_chord_buttons > button:active {
     filter: invert(100%);
+  }
+
+  .scrubber_buttons img, .jump_buttons img {
+    width: 30px;
   }
 
   .scrubber_buttons {

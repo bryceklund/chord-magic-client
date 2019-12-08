@@ -237,7 +237,7 @@ class Library extends Component {
                     <li className='scale sus4' onClick={(e) => this.setScale(e.target.textContent)}>Sus4</li>
                     <li className='scale aug' onClick={(e) => this.setScale(e.target.textContent)}>Aug</li>
                 </ul>
-                <ul className={`scales chords ${!this.state.toggleHidden ? 'hidden' : ''}`}>
+                <ul className={`chords ${!this.state.toggleHidden ? 'hidden' : ''}`}>
                     <li className={`note a ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>A</li>
                     <li className={`note bb ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>Bb</li>
                     <li className={`note b ${this.state.scale ? this.state.scale : ''}`} onClick={(e) => this.toggleSelection(e.target.textContent, e.target)}>B</li>

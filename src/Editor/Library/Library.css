@@ -200,6 +200,12 @@ nav {
   columns: 3;
 }
 
+.chords {
+  list-style: none;
+  padding-left: 0;
+  columns: 3;
+}
+
 .scale a, .scale a:visited {
   text-decoration: none;
   color: black;
@@ -489,7 +495,6 @@ nav {
   }
 
   .library {
-    margin-top: 30px;
     width: 100%;
   }
 
@@ -514,6 +519,7 @@ nav {
   }
 
   .note {
+    display: inline-block;
     font-size: 40px;
   }
 
@@ -523,8 +529,28 @@ nav {
   }
 
   .scales {
-    columns: 2;
-    padding-top: 40px;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-count: 100px;
+    -moz-column-width: 100px;
+    column-width: 100px;
+    padding-top: 0;
+    margin: auto;
+    width: 87%;
+    margin-top: 30px;
+  }
+
+  .chords {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-count: 100px;
+    -moz-column-width: 100px;
+    column-width: 100px;
+    padding-top: 0;
+    margin: auto;
+    width: 87%;
   }
 
   .login_message {

@@ -1,68 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Chord Magic
 
-In the project directory, you can run:
+  
 
-### `npm start`
+This project is live, [right here](https://chord-magic.bryceklund.dev/).
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## API Documentation
 
-### `npm test`
+  
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Can be found in the readme of [this repo](https://github.com/bryceklund/chord-magic-server).
 
-### `npm run build`
+  
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Summary & How-To
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Chord Magic is a tool for piecing together and storing musical chord progressions. It's built with React and comes with an API (see above). The core of the app is made up of a timeline and a library/settings component.
 
-### `npm run eject`
+![timeline and library/settings](https://i.imgur.com/i0JZtIR.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can scrub through the timeline using the single arrows,
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![scrub arrows](https://i.imgur.com/gGpPHHU.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+or jump to the start/end using the double arrows: 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![jump arrows](https://i.imgur.com/cyQxLvz.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Swap chord positions by clicking the arrows on the chords and delete chords by clicking the X, 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![chord swap buttons](https://i.imgur.com/RbSbY0b.gif)
 
-### Analyzing the Bundle Size
+adjust playback settings with the volume and speed sliders, 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![playback settings](https://i.imgur.com/FIIlksi.png)
 
-### Making a Progressive Web App
+and play or stop the current progression:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![play stop buttons](https://i.imgur.com/GLdtt0s.png)
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Click on a chord to select it and learn what its scale, instrument, and octave are.
 
-### Deployment
+  ![chord selection](https://i.imgur.com/i7cMgfH.gif)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+To add chords, first drill down one of the provided scales in the library by clicking on it. Next, click a chord to select it. Enable "prehear" to hear the chord when selected, before adding it to the timeline. Use the instrument and octave settings to change the sound of the chord. Next, select the chord you'd like to replace in the timeline, or select nothing to add the chord to the end. Insert the chord by clicking the "insert chord" button.
 
-### `npm run build` fails to minify
+![inserting a chord](https://i.imgur.com/K0TPTgO.gif)
+  
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Register for an account by following the upper-right link, or log in if you already have an account.
+
+![login signup buttons](https://i.imgur.com/Iw8ppBK.png)
+  
+
+While signed in, view your saved progressions by clicking "Saved Progressions" in the upper right corner. Alternatively, save the current progression with the "Save Progression" button in the library's settings pane (if you're editing an existing progression, you can choose "Overwrite Existing" to commit your changes).
+
+![progressions button](https://i.imgur.com/JsByDIJ.gif)
+
+ 
+
+Load a saved progression by selecting it from the Saved Progressions page and clicking "load". You can also play/stop or delete a saved progression using the corresponding buttons in the panel.
+
+![loading a progression](https://i.imgur.com/4BT6Oby.gif)
+
+
+## Technologies Used
+Bootstrapped with create-react-app, frontend written in JavaScript ES6 with React 16.9
+
+Audio rendered via the Web Audio API
+
+Backend written in Node.js with Express, bcrypt, and jwt
+
+Database built with PostgreSQL
