@@ -27,7 +27,7 @@ class Library extends Component {
 
     setOct = (oct) => {
       let newOct;
-      oct == -2 ? newOct = 'minusTwo' : oct == -1 ? newOct = 'minusOne' : oct == 0 ? newOct = 'zero' : oct == 1 ? newOct = 'one' : oct == 2 ? newOct = 'two' : newOct = 'zero'
+      oct == -2 ? newOct = 'minusTwo' : oct == -1 ? newOct = 'minusOne' : oct == 0 ? newOct = 'zero' : oct == 1 ? newOct = 'plusOne' : oct == 2 ? newOct = 'plusTwo' : newOct = 'zero'
       this.setState({
         octave: newOct,
         displayOctave: oct
