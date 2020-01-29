@@ -196,7 +196,6 @@ class Timeline extends Component {
     }
 
     showError = (error) => {
-      console.log(error)
       this.setState({
         error: true,
         errorMessage: error
@@ -313,7 +312,8 @@ class Timeline extends Component {
     toggleActiveChord = (id) => {
       if (typeof id === 'number') {
         this.unHighlightPlus()
-        if (!this.state.activeChords.find(chord => chord.id === id).active) {
+        let chord = this.state.activeChords.find(chord => chord.id === id)
+        if (chord && !chord.active) {
           this.props.chordSelected('active')
           this.props.setIndex(this.state.activeChords.indexOf(this.state.activeChords.find(chord => chord.id === id)))
           this.setActiveCell(id)
