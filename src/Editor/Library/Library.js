@@ -31,7 +31,7 @@ class Library extends Component {
       this.setState({
         octave: newOct,
         displayOctave: oct
-      }, this.props.storeChord(this.state.voice, oct, this.state.scale, this.state.chord))
+      }, this.props.storeChord(this.state.voice, this.state.octave, this.state.scale, this.state.chord))
     }
 
     setVoice = (voice) => {
