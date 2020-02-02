@@ -85,7 +85,7 @@ class Timeline extends Component {
 
     displayOctave = (oct) => {
       //converts octave from string to number
-      return oct === 'minusTwo' ? -2 : oct === 'minusOne' ? -1 : oct === 'zero' ? 0 : oct === 'one' ? 1 : oct === 'two' ? 2 : '' 
+      return oct === 'minusTwo' ? -2 : oct === 'minusOne' ? -1 : oct === 'zero' ? 0 : oct === 'plusOne' ? 1 : oct === 'plusTwo' ? 2 : '' 
     }
 
     jumpToEnd = () => {

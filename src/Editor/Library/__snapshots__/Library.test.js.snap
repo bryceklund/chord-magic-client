@@ -202,131 +202,131 @@ exports[`Library matches its snapshot 1`] = `
         className="scales "
       >
         <li
-          className="scale"
+          className="scale maj"
           onClick={[Function]}
         >
           Maj
         </li>
         <li
-          className="scale"
+          className="scale min"
           onClick={[Function]}
         >
           Min
         </li>
         <li
-          className="scale"
+          className="scale maj7"
           onClick={[Function]}
         >
           Maj7
         </li>
         <li
-          className="scale"
+          className="scale min7"
           onClick={[Function]}
         >
           Min7
         </li>
         <li
-          className="scale"
+          className="scale dim"
           onClick={[Function]}
         >
           Dim
         </li>
         <li
-          className="scale"
+          className="scale dom7"
           onClick={[Function]}
         >
           Dom7
         </li>
         <li
-          className="scale"
+          className="scale sus2"
           onClick={[Function]}
         >
           Sus2
         </li>
         <li
-          className="scale"
+          className="scale sus4"
           onClick={[Function]}
         >
           Sus4
         </li>
         <li
-          className="scale"
+          className="scale aug"
           onClick={[Function]}
         >
           Aug
         </li>
       </ul>
       <ul
-        className="scales chords hidden"
+        className="chords hidden"
       >
         <li
-          className="scale"
+          className="note a "
           onClick={[Function]}
         >
           A
         </li>
         <li
-          className="scale"
+          className="note bb "
           onClick={[Function]}
         >
           Bb
         </li>
         <li
-          className="scale"
+          className="note b "
           onClick={[Function]}
         >
           B
         </li>
         <li
-          className="scale"
+          className="note c "
           onClick={[Function]}
         >
           C
         </li>
         <li
-          className="scale"
+          className="note db "
           onClick={[Function]}
         >
           Db
         </li>
         <li
-          className="scale"
+          className="note d "
           onClick={[Function]}
         >
           D
         </li>
         <li
-          className="scale"
+          className="note eb "
           onClick={[Function]}
         >
           Eb
         </li>
         <li
-          className="scale"
+          className="note e "
           onClick={[Function]}
         >
           E
         </li>
         <li
-          className="scale"
+          className="note f "
           onClick={[Function]}
         >
           F
         </li>
         <li
-          className="scale"
+          className="note gb "
           onClick={[Function]}
         >
           Gb
         </li>
         <li
-          className="scale"
+          className="note g "
           onClick={[Function]}
         >
           G
         </li>
         <li
-          className="scale"
+          className="note ab "
           onClick={[Function]}
         >
           Ab

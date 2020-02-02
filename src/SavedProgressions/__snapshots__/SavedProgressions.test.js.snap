@@ -1,9 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SavedProgressions matches its snapshot 1`] = `
-<div
-  className="forbidden"
+<section
+  className="library_container saved_container"
 >
-  You must be signed in to view this page.
-</div>
+  <div
+    className="library_settings"
+  >
+    <div
+      className="saved_settings"
+    >
+      <button
+        className="play_progression hidden"
+        onClick={[Function]}
+      >
+        play
+      </button>
+      <button
+        className="stop_progression hidden"
+        onClick={[Function]}
+      >
+        stop
+      </button>
+      <a
+        className="hidden"
+        href="/editor"
+        onClick={[Function]}
+      >
+        <button
+          className="load_progression"
+          onClick={[Function]}
+        >
+          load
+        </button>
+      </a>
+      <button
+        className="delete_progression hidden"
+        onClick={[Function]}
+      >
+        delete
+      </button>
+      <a
+        className="back_progression"
+        href="/editor"
+        onClick={[Function]}
+      >
+        <button>
+          back
+        </button>
+      </a>
+    </div>
+    <div
+      className="saved_library"
+    >
+      <ul
+        className="progressions"
+      >
+        <p
+          className="no_progs"
+        >
+          Save a chord progression to access it here!
+        </p>
+      </ul>
+    </div>
+  </div>
+</section>
 `;

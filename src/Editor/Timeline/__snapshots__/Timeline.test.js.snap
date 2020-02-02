@@ -11,6 +11,20 @@ exports[`Timeline matches its snapshot 1`] = `
     "
   </div>
   <div
+    className="hidden"
+  >
+    <div
+      className="note_container"
+      viewBox="25 25 50 50"
+    >
+      <img
+        className="music_note"
+        src="loading-icon.png"
+      />
+    </div>
+    Oops, try again in a few seconds...
+  </div>
+  <div
     className="play_stop_buttons"
   >
     <button
@@ -18,7 +32,8 @@ exports[`Timeline matches its snapshot 1`] = `
     >
       <img
         alt="play button"
-        src=""
+        className="play_stop_icon"
+        src="play-button.png"
       />
     </button>
         
@@ -27,26 +42,64 @@ exports[`Timeline matches its snapshot 1`] = `
     >
       <img
         alt="stop button"
-        src=""
+        className="play_stop_icon"
+        src="stop-button.png"
       />
     </button>
   </div>
   <div
     className="global_view"
   >
-    ++++---
+    <span
+      className="global maj g"
+    >
+      _
+    </span>
+    <span
+      className="global maj b"
+    >
+      _
+    </span>
+    <span
+      className="global min e"
+    >
+      _
+    </span>
+    <span
+      className="global maj c"
+    >
+      _
+    </span>
+    <span
+      className="global_inactive g"
+    >
+      _
+    </span>
+    <span
+      className="global_inactive b"
+    >
+      _
+    </span>
+    <span
+      className="global_inactive c"
+    >
+      _
+    </span>
   </div>
   <div
     className="player_timeline"
   >
     <div
-      className="chord_box one"
+      className="chord_box one maj g"
     >
       <button
         className="delete_chord"
         onClick={[Function]}
       >
-        X
+        <img
+          alt="delete chord"
+          src="delete-button.png"
+        />
       </button>
       <span
         className="chord_label "
@@ -54,7 +107,7 @@ exports[`Timeline matches its snapshot 1`] = `
       >
         G
         <section
-          className="hidden"
+          className="chord_info hidden"
         >
           <div
             className="info_label"
@@ -82,19 +135,22 @@ exports[`Timeline matches its snapshot 1`] = `
         >
           <img
             alt="move right"
-            src=""
+            src="move-right-arrow.png"
           />
         </button>
       </div>
     </div>
     <div
-      className="chord_box two"
+      className="chord_box two maj b"
     >
       <button
         className="delete_chord"
         onClick={[Function]}
       >
-        X
+        <img
+          alt="delete chord"
+          src="delete-button.png"
+        />
       </button>
       <span
         className="chord_label "
@@ -102,7 +158,7 @@ exports[`Timeline matches its snapshot 1`] = `
       >
         B
         <section
-          className="hidden"
+          className="chord_info hidden"
         >
           <div
             className="info_label"
@@ -130,7 +186,7 @@ exports[`Timeline matches its snapshot 1`] = `
         >
           <img
             alt="move left"
-            src=""
+            src="move-left-arrow.png"
           />
         </button>
         <button
@@ -139,19 +195,22 @@ exports[`Timeline matches its snapshot 1`] = `
         >
           <img
             alt="move right"
-            src=""
+            src="move-right-arrow.png"
           />
         </button>
       </div>
     </div>
     <div
-      className="chord_box three"
+      className="chord_box three min e"
     >
       <button
         className="delete_chord"
         onClick={[Function]}
       >
-        X
+        <img
+          alt="delete chord"
+          src="delete-button.png"
+        />
       </button>
       <span
         className="chord_label "
@@ -159,7 +218,7 @@ exports[`Timeline matches its snapshot 1`] = `
       >
         E
         <section
-          className="hidden"
+          className="chord_info hidden"
         >
           <div
             className="info_label"
@@ -187,7 +246,7 @@ exports[`Timeline matches its snapshot 1`] = `
         >
           <img
             alt="move left"
-            src=""
+            src="move-left-arrow.png"
           />
         </button>
         <button
@@ -196,19 +255,22 @@ exports[`Timeline matches its snapshot 1`] = `
         >
           <img
             alt="move right"
-            src=""
+            src="move-right-arrow.png"
           />
         </button>
       </div>
     </div>
     <div
-      className="chord_box four"
+      className="chord_box four maj c"
     >
       <button
         className="delete_chord"
         onClick={[Function]}
       >
-        X
+        <img
+          alt="delete chord"
+          src="delete-button.png"
+        />
       </button>
       <span
         className="chord_label "
@@ -216,7 +278,7 @@ exports[`Timeline matches its snapshot 1`] = `
       >
         C
         <section
-          className="hidden"
+          className="chord_info hidden"
         >
           <div
             className="info_label"
@@ -244,7 +306,7 @@ exports[`Timeline matches its snapshot 1`] = `
         >
           <img
             alt="move left"
-            src=""
+            src="move-left-arrow.png"
           />
         </button>
         <button
@@ -253,7 +315,7 @@ exports[`Timeline matches its snapshot 1`] = `
         >
           <img
             alt="move right"
-            src=""
+            src="move-right-arrow.png"
           />
         </button>
       </div>
@@ -267,7 +329,7 @@ exports[`Timeline matches its snapshot 1`] = `
     >
       <img
         alt="scrub left"
-        src=""
+        src="scrub-left-arrow.png"
       />
     </button>
     <div
@@ -317,7 +379,7 @@ exports[`Timeline matches its snapshot 1`] = `
     >
       <img
         alt="scrub right"
-        src=""
+        src="scrub-right-arrow.png"
       />
     </button>
   </div>
@@ -327,12 +389,18 @@ exports[`Timeline matches its snapshot 1`] = `
     <button
       onClick={[Function]}
     >
-      jump to beginning
+      <img
+        alt="jump to beginning"
+        src="jump-left-arrow.png"
+      />
     </button>
     <button
       onClick={[Function]}
     >
-      jump to end
+      <img
+        alt="jump to end"
+        src="jump-right-arrow.png"
+      />
     </button>
   </div>
 </section>

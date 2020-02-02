@@ -15,6 +15,7 @@ import TokenService from './services/tokenService'
 import AudioStore from './Editor/AudioStore'
 import './App.css'
 import webAudioTouchUnlock from 'web-audio-touch-unlock'
+import context from './context'
 
 class App extends Component {
 
@@ -29,7 +30,7 @@ class App extends Component {
       progId: null,
       progName: null,
       token: null,
-      context: new (window.AudioContext || window.webkitAudioContext)()
+      context: context()
     }
   }
 
@@ -79,14 +80,14 @@ class App extends Component {
   signOut = () => {
     TokenService.clearAuthToken()
     this.setState({
-      redirect: false,
+      redirect: true,
       signedIn: false,
       selected: null,
       progId: null,
       progName: null,
       token: null
-
-    })
+    }, window.location.reload())
+    
   }
 
   loadProgression = (progression) => {

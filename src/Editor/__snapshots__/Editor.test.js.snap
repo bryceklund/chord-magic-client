@@ -12,6 +12,20 @@ Array [
       "
     </div>
     <div
+      className="hidden"
+    >
+      <div
+        className="note_container"
+        viewBox="25 25 50 50"
+      >
+        <img
+          className="music_note"
+          src="loading-icon.png"
+        />
+      </div>
+      Oops, try again in a few seconds...
+    </div>
+    <div
       className="play_stop_buttons"
     >
       <button
@@ -19,7 +33,8 @@ Array [
       >
         <img
           alt="play button"
-          src=""
+          className="play_stop_icon"
+          src="play-button.png"
         />
       </button>
           
@@ -28,26 +43,64 @@ Array [
       >
         <img
           alt="stop button"
-          src=""
+          className="play_stop_icon"
+          src="stop-button.png"
         />
       </button>
     </div>
     <div
       className="global_view"
     >
-      ++++---
+      <span
+        className="global maj g"
+      >
+        _
+      </span>
+      <span
+        className="global maj b"
+      >
+        _
+      </span>
+      <span
+        className="global min e"
+      >
+        _
+      </span>
+      <span
+        className="global maj c"
+      >
+        _
+      </span>
+      <span
+        className="global_inactive g"
+      >
+        _
+      </span>
+      <span
+        className="global_inactive b"
+      >
+        _
+      </span>
+      <span
+        className="global_inactive c"
+      >
+        _
+      </span>
     </div>
     <div
       className="player_timeline"
     >
       <div
-        className="chord_box one"
+        className="chord_box one maj g"
       >
         <button
           className="delete_chord"
           onClick={[Function]}
         >
-          X
+          <img
+            alt="delete chord"
+            src="delete-button.png"
+          />
         </button>
         <span
           className="chord_label "
@@ -55,7 +108,7 @@ Array [
         >
           G
           <section
-            className="hidden"
+            className="chord_info hidden"
           >
             <div
               className="info_label"
@@ -83,19 +136,22 @@ Array [
           >
             <img
               alt="move right"
-              src=""
+              src="move-right-arrow.png"
             />
           </button>
         </div>
       </div>
       <div
-        className="chord_box two"
+        className="chord_box two maj b"
       >
         <button
           className="delete_chord"
           onClick={[Function]}
         >
-          X
+          <img
+            alt="delete chord"
+            src="delete-button.png"
+          />
         </button>
         <span
           className="chord_label "
@@ -103,7 +159,7 @@ Array [
         >
           B
           <section
-            className="hidden"
+            className="chord_info hidden"
           >
             <div
               className="info_label"
@@ -131,7 +187,7 @@ Array [
           >
             <img
               alt="move left"
-              src=""
+              src="move-left-arrow.png"
             />
           </button>
           <button
@@ -140,19 +196,22 @@ Array [
           >
             <img
               alt="move right"
-              src=""
+              src="move-right-arrow.png"
             />
           </button>
         </div>
       </div>
       <div
-        className="chord_box three"
+        className="chord_box three min e"
       >
         <button
           className="delete_chord"
           onClick={[Function]}
         >
-          X
+          <img
+            alt="delete chord"
+            src="delete-button.png"
+          />
         </button>
         <span
           className="chord_label "
@@ -160,7 +219,7 @@ Array [
         >
           E
           <section
-            className="hidden"
+            className="chord_info hidden"
           >
             <div
               className="info_label"
@@ -188,7 +247,7 @@ Array [
           >
             <img
               alt="move left"
-              src=""
+              src="move-left-arrow.png"
             />
           </button>
           <button
@@ -197,19 +256,22 @@ Array [
           >
             <img
               alt="move right"
-              src=""
+              src="move-right-arrow.png"
             />
           </button>
         </div>
       </div>
       <div
-        className="chord_box four"
+        className="chord_box four maj c"
       >
         <button
           className="delete_chord"
           onClick={[Function]}
         >
-          X
+          <img
+            alt="delete chord"
+            src="delete-button.png"
+          />
         </button>
         <span
           className="chord_label "
@@ -217,7 +279,7 @@ Array [
         >
           C
           <section
-            className="hidden"
+            className="chord_info hidden"
           >
             <div
               className="info_label"
@@ -245,7 +307,7 @@ Array [
           >
             <img
               alt="move left"
-              src=""
+              src="move-left-arrow.png"
             />
           </button>
           <button
@@ -254,7 +316,7 @@ Array [
           >
             <img
               alt="move right"
-              src=""
+              src="move-right-arrow.png"
             />
           </button>
         </div>
@@ -268,7 +330,7 @@ Array [
       >
         <img
           alt="scrub left"
-          src=""
+          src="scrub-left-arrow.png"
         />
       </button>
       <div
@@ -318,7 +380,7 @@ Array [
       >
         <img
           alt="scrub right"
-          src=""
+          src="scrub-right-arrow.png"
         />
       </button>
     </div>
@@ -328,12 +390,18 @@ Array [
       <button
         onClick={[Function]}
       >
-        jump to beginning
+        <img
+          alt="jump to beginning"
+          src="jump-left-arrow.png"
+        />
       </button>
       <button
         onClick={[Function]}
       >
-        jump to end
+        <img
+          alt="jump to end"
+          src="jump-right-arrow.png"
+        />
       </button>
     </div>
   </section>,
@@ -538,131 +606,131 @@ Array [
           className="scales "
         >
           <li
-            className="scale"
+            className="scale maj"
             onClick={[Function]}
           >
             Maj
           </li>
           <li
-            className="scale"
+            className="scale min"
             onClick={[Function]}
           >
             Min
           </li>
           <li
-            className="scale"
+            className="scale maj7"
             onClick={[Function]}
           >
             Maj7
           </li>
           <li
-            className="scale"
+            className="scale min7"
             onClick={[Function]}
           >
             Min7
           </li>
           <li
-            className="scale"
+            className="scale dim"
             onClick={[Function]}
           >
             Dim
           </li>
           <li
-            className="scale"
+            className="scale dom7"
             onClick={[Function]}
           >
             Dom7
           </li>
           <li
-            className="scale"
+            className="scale sus2"
             onClick={[Function]}
           >
             Sus2
           </li>
           <li
-            className="scale"
+            className="scale sus4"
             onClick={[Function]}
           >
             Sus4
           </li>
           <li
-            className="scale"
+            className="scale aug"
             onClick={[Function]}
           >
             Aug
           </li>
         </ul>
         <ul
-          className="scales chords hidden"
+          className="chords hidden"
         >
           <li
-            className="scale"
+            className="note a "
             onClick={[Function]}
           >
             A
           </li>
           <li
-            className="scale"
+            className="note bb "
             onClick={[Function]}
           >
             Bb
           </li>
           <li
-            className="scale"
+            className="note b "
             onClick={[Function]}
           >
             B
           </li>
           <li
-            className="scale"
+            className="note c "
             onClick={[Function]}
           >
             C
           </li>
           <li
-            className="scale"
+            className="note db "
             onClick={[Function]}
           >
             Db
           </li>
           <li
-            className="scale"
+            className="note d "
             onClick={[Function]}
           >
             D
           </li>
           <li
-            className="scale"
+            className="note eb "
             onClick={[Function]}
           >
             Eb
           </li>
           <li
-            className="scale"
+            className="note e "
             onClick={[Function]}
           >
             E
           </li>
           <li
-            className="scale"
+            className="note f "
             onClick={[Function]}
           >
             F
           </li>
           <li
-            className="scale"
+            className="note gb "
             onClick={[Function]}
           >
             Gb
           </li>
           <li
-            className="scale"
+            className="note g "
             onClick={[Function]}
           >
             G
           </li>
           <li
-            className="scale"
+            className="note ab "
             onClick={[Function]}
           >
             Ab

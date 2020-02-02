@@ -82,7 +82,7 @@ const AudioStore = {
             G: 783.99,
             Ab: 830.61
         },
-        plusTwo: {
+        plusOne: {
             A: 880.00,
             Bb: 932.33,
             B: 987.77,
@@ -96,7 +96,7 @@ const AudioStore = {
             G: 1567.98,
             Ab: 1661.22
         },
-        plusOne: {
+        plusTwo: {
             A: 1760.00,
             Bb: 1864.66,
             B: 1975.53,

@@ -293,6 +293,7 @@ nav {
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  z-index: 999;
 }
 
 .new_save_tooltip input, .update_tooltip input {
